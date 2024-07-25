@@ -10,3 +10,13 @@
 body {
     background-color: white;
 }
+
+#app {
+    min-height: 100dvh;
+    background-color: white;
+}
+
+.sortable-ghost {
+    opacity: 0;
+}
+
