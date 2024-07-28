@@ -1,17 +1,13 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from "./router/router.ts";
 import VueSortable from "vue3-sortablejs";
-import Vue3TouchEvents, {
-    type Vue3TouchEventsOptions,
-} from "vue3-touch-events";
+import {createPinia} from "pinia";
 
-const app  = createApp(App);
+const app = createApp(App);
+const pinia = createPinia()
 app.use(router)
-app.use(VueSortable);
-app.use<Vue3TouchEventsOptions>(Vue3TouchEvents, {
-    disableClick: false,
-    longTapTimeInterval: 300
-})
+app.use(VueSortable)
+app.use(pinia)
 app.mount('#app')

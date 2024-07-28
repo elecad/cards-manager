@@ -1,23 +1,94 @@
 <script setup lang="ts">
-import {DrawerContent, DrawerOverlay, DrawerPortal, DrawerRoot} from "vaul-vue";
+import {ref} from "vue";
+
+const isOpen = defineModel({required: true, type: Boolean})
+const drawerElement = ref<HTMLDivElement | undefined>(undefined)
+const isSwipe = ref(false)
+let start = 0
+
+const startSwipe = (event: TouchEvent) => {
+  isSwipe.value = true
+  start = event.touches[0].screenY
+}
+
+const processSwipe = (event: TouchEvent) => {
+  if (!drawerElement.value)
+    return
+  const position = event.touches[0].screenY - start
+  if (position > 0) {
+    drawerElement.value.style.transform = `translateY(${position}px)`
+  }
+}
+
+const endSwipe = (event: TouchEvent) => {
+  if (!drawerElement.value)
+    return
+  const delta = event.changedTouches[0].screenY - start
+
+  if (delta > 100) {
+    isOpen.value = false
+  }
+  drawerElement.value.style.transform = ``
+  isSwipe.value = false
+
+}
+
+
 </script>
 
 <template>
-  <DrawerRoot should-scale-background>
-    <DrawerPortal>
-      <DrawerOverlay class="fixed inset-0 bg-black/40"/>
-      <DrawerContent class="bg-white flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0" aria-describedby="undefined">
-        <div class="p-4 rounded-t-[10px] flex-1">
-          <div class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
-          <div class="max-w-md mx-auto">
-            123
-          </div>
-        </div>
-      </DrawerContent>
-    </DrawerPortal>
-  </DrawerRoot>
+  <div class="drawer-root">
+    <Transition>
+      <div class="drawer-overlay fixed inset-0 bg-black/30" @click="isOpen = false"
+           v-if="isOpen"></div>
+    </Transition>
+    <div
+        class="drawer-wrapper bg-white flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0 p-4"
+        @touchstart="startSwipe"
+        @touchmove="processSwipe"
+        @touchend="endSwipe"
+        :class="{'open': isOpen, '!transition-none': isSwipe}"
+        ref="drawerElement"
+
+    >
+      <div class="mx-auto w-12 h-1.5 rounded-full bg-zinc-300 mb-8"/>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+.drawer-wrapper {
+  transition: transform .2s cubic-bezier(.32, .72, 0, 1);
+  transform: translateY(110%);
 
+}
+
+.drawer-wrapper.open {
+  transform: translateY(0);
+}
+
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>

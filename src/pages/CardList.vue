@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import WalletIcon from "../assets/icons/wallet.svg"
-import AddCardIcon from "../assets/icons/add_card.svg"
-import SettingsIcon from "../assets/icons/settings.svg"
-import SearchIcon from "../assets/icons/search.svg"
-import CardOffIcon from "../assets/icons/card_off.svg"
+
 import {ref} from "vue";
 import DrawerLayout from "../layouts/DrawerLayout.vue";
 import Navigation from "../components/Navigation.vue";
 import Search from "../components/Search.vue";
-import Button from "../components/Button.vue";
 import SaleCard from "../components/SaleCard.vue";
+import {useDrawerStore} from "../store/useDrawerStore.ts";
 
 const cards = ref(['Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют'])
 const isEdit = ref(true)
+const drawerStore = useDrawerStore()
+
 </script>
 
 <template>
@@ -47,7 +45,7 @@ const isEdit = ref(true)
           <!--            <img src="../assets/logo/not-found.png" alt="Логотип" width="24" class="rounded"/>-->
           <!--            <div class="text-wrap break-all font-mono font-semibold">{{ card }}</div>-->
           <!--          </div>-->
-          <SaleCard v-for="card in cards" :name="card"/>
+          <SaleCard v-for="card in cards" :name="card" @click="drawerStore.openDrawer"/>
 
         </div>
 

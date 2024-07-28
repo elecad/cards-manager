@@ -12,6 +12,10 @@ body {
     background-color: white;
 }
 
+body {
+    overscroll-behavior-y: none; /* После этого свайп вниз не будет вызывать обновление страницы */
+}
+
 #app {
     min-height: 100dvh;
     background-color: white;
@@ -20,4 +24,5 @@ body {
 .sortable-ghost {
     opacity: 0;
 }
+
 

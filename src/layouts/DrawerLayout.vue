@@ -3,6 +3,11 @@
 import Drawer from "../components/Drawer.vue";
 import EditIcon from "../assets/icons/edit.svg"
 import Button from "../components/Button.vue";
+import {ref} from "vue";
+import {useDrawerStore} from "../store/useDrawerStore.ts";
+
+const drawerStore = useDrawerStore()
+
 </script>
 
 <template>
@@ -16,11 +21,11 @@ import Button from "../components/Button.vue";
           <EditIcon class="fill-gray-700"/>
         </template>
       </Button>
-      
+
     </div>
 
     <div class="drawer-wrapper">
-      <Drawer/>
+      <Drawer v-model="drawerStore.isOpen"/>
     </div>
   </div>
 </template>
