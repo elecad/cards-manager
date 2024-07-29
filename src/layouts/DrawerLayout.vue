@@ -1,12 +1,11 @@
 <script setup lang="ts">
 
-import Drawer from "../components/Drawer.vue";
+import Drawer from "../components/UI/Drawer.vue";
 import EditIcon from "../assets/icons/edit.svg"
-import Button from "../components/Button.vue";
-import {ref} from "vue";
-import {useDrawerStore} from "../store/useDrawerStore.ts";
+import Button from "../components/UI/Button.vue";
+import {useUIStore} from "../store/useUIStore.ts";
 
-const drawerStore = useDrawerStore()
+const uiStore = useUIStore()
 
 </script>
 
@@ -25,7 +24,22 @@ const drawerStore = useDrawerStore()
     </div>
 
     <div class="drawer-wrapper">
-      <Drawer v-model="drawerStore.isOpen"/>
+      <Drawer v-model="uiStore.isOpen">
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+        <div>123</div>
+      </Drawer>
+
     </div>
   </div>
 </template>

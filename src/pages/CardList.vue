@@ -5,17 +5,17 @@ import DrawerLayout from "../layouts/DrawerLayout.vue";
 import Navigation from "../components/Navigation.vue";
 import Search from "../components/Search.vue";
 import SaleCard from "../components/SaleCard.vue";
-import {useDrawerStore} from "../store/useDrawerStore.ts";
+import {useUIStore} from "../store/useUIStore.ts";
 
 const cards = ref(['Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют'])
 const isEdit = ref(true)
-const drawerStore = useDrawerStore()
+const drawerStore = useUIStore()
 
 </script>
 
 <template>
   <DrawerLayout>
-    <div vaul-drawer-wrapper="">
+    <div data-animated-background>
       <Navigation/>
 
       <div class="content px-5 pt-4">
@@ -38,13 +38,6 @@ const drawerStore = useDrawerStore()
 
         <div class="sale-card-wrapper grid grid-cols-2 gap-1.5"
              v-sortable="{ disabled: isEdit, options: { animation: 300, dragoverBubble: true} }">
-
-          <!--          <div v-for="card in cards" @click="() => {console.log(123)}"-->
-          <!--               class="sale-card aspect-video rounded-xl whitespace-normal gap-1.5 flex justify-center items-center flex-col text-sm"-->
-          <!--               style="background-color: rgb(246, 246, 247); border: 2px solid rgb(213, 213, 217)">-->
-          <!--            <img src="../assets/logo/not-found.png" alt="Логотип" width="24" class="rounded"/>-->
-          <!--            <div class="text-wrap break-all font-mono font-semibold">{{ card }}</div>-->
-          <!--          </div>-->
           <SaleCard v-for="card in cards" :name="card" @click="drawerStore.openDrawer"/>
 
         </div>

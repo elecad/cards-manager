@@ -3,7 +3,7 @@
 import SettingsIcon from "../assets/icons/settings.svg";
 import AddCardIcon from "../assets/icons/add_card.svg";
 import WalletIcon from "../assets/icons/wallet.svg";
-import Button from "./Button.vue";
+import Button from "./UI/Button.vue";
 </script>
 
 <template>

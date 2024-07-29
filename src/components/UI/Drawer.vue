@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 
 const isOpen = defineModel({required: true, type: Boolean})
 const drawerElement = ref<HTMLDivElement | undefined>(undefined)
 const isSwipe = ref(false)
+const animatedBackgroundElement = ref<HTMLDivElement | null>(null)
+onMounted(() => {
+  animatedBackgroundElement.value = document.querySelector("[data-animated-background]")
+})
 let start = 0
 
 const startSwipe = (event: TouchEvent) => {
@@ -33,40 +37,39 @@ const endSwipe = (event: TouchEvent) => {
 
 }
 
+watch(isOpen, () => {
+  console.log(animatedBackgroundElement.value)
+  if (animatedBackgroundElement.value) {
+    // animatedBackgroundElement.value.classList.toggle('animated-background')
+    document.body.classList.toggle('small-body')
+  }
+  // document.body.classList.toggle("background-drawer")
+})
 
 </script>
 
 <template>
-  <div class="drawer-root">
-    <Transition>
-      <div class="drawer-overlay fixed inset-0 bg-black/30" @click="isOpen = false"
-           v-if="isOpen"></div>
-    </Transition>
-    <div
-        class="drawer-wrapper bg-white flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0 p-4"
-        @touchstart="startSwipe"
-        @touchmove="processSwipe"
-        @touchend="endSwipe"
-        :class="{'open': isOpen, '!transition-none': isSwipe}"
-        ref="drawerElement"
+  <Teleport to="body">
+    <div class="drawer-root">
+      <Transition>
+        <div class="drawer-overlay fixed inset-0 bg-black/30" @click="isOpen = false"
+             v-if="isOpen"></div>
+      </Transition>
+      <div
+          class="drawer-wrapper bg-white flex flex-col rounded-t-[10px] fixed bottom-0 left-0 right-0 p-4"
+          @touchstart="startSwipe"
+          @touchmove="processSwipe"
+          @touchend="endSwipe"
+          :class="{'open': isOpen, '!transition-none': isSwipe}"
+          ref="drawerElement"
 
-    >
-      <div class="mx-auto w-12 h-1.5 rounded-full bg-zinc-300 mb-8"/>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
-      <div>123</div>
+      >
+        <div class="mx-auto w-12 h-1.5 rounded-full bg-zinc-300 mb-8"/>
+        <slot/>
+      </div>
     </div>
-  </div>
+  </Teleport>
+
 </template>
 
 <style scoped>

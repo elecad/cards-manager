@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Button from "./UI/Button.vue";
+
 interface SaleCardProps {
   name: string,
   icon?: string

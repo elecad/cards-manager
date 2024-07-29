@@ -20,11 +20,16 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const isNormal = computed(() => props.size == "normal")
 
+const ripple = () => {
+
+}
+
 </script>
 
 <template>
   <button
-      class="flex items-center justify-center outline-none rounded-xl gap-2 transition active:scale-95 shadow text-sm hover:opacity-90 active:opacity-100"
+      @click="ripple"
+      class="flex items-center justify-center outline-none rounded-xl gap-2 transition active:scale-90 shadow text-sm hover:opacity-90 active:opacity-100"
       :class="bgColor, textColor,
       {
         'ui-btn-normal-only-icon': isNormal && onlyIcon,
