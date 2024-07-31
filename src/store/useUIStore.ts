@@ -20,13 +20,10 @@ export const useUIStore = defineStore('drawer', () => {
 
     const isEdit = ref(false)
 
-    const startEdit = () => {
-        isEdit.value = true
+    const changeEdit = () => {
+        isEdit.value = !isEdit.value
     }
 
-    const endEdit = () => {
-        isEdit.value = false
-    }
 
-    return {isOpen, openDrawer, closeDrawer, isEdit, startEdit, endEdit}
+    return {isOpen, openDrawer, closeDrawer, isEdit, changeEdit}
 })

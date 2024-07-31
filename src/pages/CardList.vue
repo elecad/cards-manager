@@ -6,9 +6,9 @@ import Navigation from "../components/Navigation.vue";
 import Search from "../components/Search.vue";
 import SaleCard from "../components/SaleCard.vue";
 import {useUIStore} from "../store/useUIStore.ts";
+import TouchList from "../components/UI/TouchList.vue";
 
 const cards = ref(['Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют'])
-const isEdit = ref(true)
 const drawerStore = useUIStore()
 
 </script>
@@ -36,11 +36,9 @@ const drawerStore = useUIStore()
         <!--    </div>-->
 
 
-        <div class="sale-card-wrapper grid grid-cols-2 gap-1.5"
-             v-sortable="{ disabled: isEdit, options: { animation: 300, dragoverBubble: true} }">
+        <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5">
           <SaleCard v-for="card in cards" :name="card" @click="drawerStore.openDrawer"/>
-
-        </div>
+        </TouchList>
 
 
       </div>

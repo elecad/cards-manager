@@ -19,9 +19,6 @@ body {
     background-color: white;
 }
 
-.sortable-ghost {
-    opacity: 0;
-}
 
 .animated-background {
     transform: scale(0.96);

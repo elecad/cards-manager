@@ -37,10 +37,10 @@ const ripple = () => {
         'p-4': !isNormal && !onlyIcon,
         'p-3': isNormal && !onlyIcon,
       }">
-
     <slot name="icon-left"/>
     <slot/>
     <slot name="icon-right"/>
+
 
   </button>
 </template>

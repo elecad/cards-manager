@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import Drawer from "../components/UI/Drawer.vue";
-import EditIcon from "../assets/icons/edit.svg"
+import AddIcon from "../assets/icons/add.svg"
 import Button from "../components/UI/Button.vue";
 import {useUIStore} from "../store/useUIStore.ts";
 
@@ -15,9 +15,10 @@ const uiStore = useUIStore()
     <slot/>
 
     <div class="floating-button-drawer flex justify-end items-center w-full p-5">
-      <Button only-icon size="large" bg-color="bg-gray-300">
+      <Button only-icon size="large"
+              bg-color="bg-blue-500">
         <template v-slot:icon-left>
-          <EditIcon class="fill-gray-700"/>
+          <AddIcon class="fill-white"/>
         </template>
       </Button>
 
