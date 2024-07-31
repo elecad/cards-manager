@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>Страница камеры</div>
+  <div>Страница файла</div>
 </template>
 
 <style scoped>

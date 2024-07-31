@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <div>Страница камеры</div>
+  <div class="drawer-layout w-full h-full">
+    <slot/>
+  </div>
 </template>
 
 <style scoped>

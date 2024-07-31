@@ -4,6 +4,11 @@ import SettingsIcon from "../assets/icons/settings.svg";
 import AddCardIcon from "../assets/icons/add_card.svg";
 import WalletIcon from "../assets/icons/wallet.svg";
 import Button from "./UI/Button.vue";
+import {useRouter} from "vue-router";
+import {RoutesPath} from "../router/router.ts";
+
+const {push} = useRouter();
+
 </script>
 
 <template>
@@ -14,7 +19,7 @@ import Button from "./UI/Button.vue";
     </div>
 
     <div class="buttons-wrapper flex gap-4">
-      <Button only-icon bg-color="bg-blue-600">
+      <Button only-icon bg-color="bg-blue-600" @click="() => {push(RoutesPath.create)}">
         <template v-slot:icon-left>
           <AddCardIcon class="fill-white"/>
         </template>
@@ -30,5 +35,7 @@ import Button from "./UI/Button.vue";
 </template>
 
 <style scoped>
-
+.navigation-bar {
+  height: 64px;
+}
 </style>

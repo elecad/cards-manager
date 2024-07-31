@@ -3,18 +3,26 @@ import CardList from "../pages/CardList.vue";
 import CreateCard from "../pages/CreateCard.vue";
 import EditCard from "../pages/EditCard.vue";
 import Camera from "../pages/Camera.vue";
+import File from "../pages/File.vue";
+
+export const RoutesPath = {
+    main: "/",
+    create: "/create",
+    edit: "/edit",
+    camera: "/camera",
+    file: "/file"
+}
 
 
-const routes: RouteRecordRaw[] = [
-    { path: '/', component: CardList },
-    { path: '/create', component: CreateCard },
-    { path: '/edit', component: EditCard },
-    { path: '/camera', component: Camera },
+export const routes: RouteRecordRaw[] = [
+    {path: RoutesPath.main, component: CardList},
+    {path: RoutesPath.create, component: CreateCard},
+    {path: RoutesPath.edit, component: EditCard},
+    {path: RoutesPath.camera, component: Camera},
+    {path: RoutesPath.file, component: File}
 ]
 
-const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes,
 })
-
-export default router;
