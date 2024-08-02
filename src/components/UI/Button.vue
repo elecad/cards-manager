@@ -29,7 +29,7 @@ const ripple = () => {
 <template>
   <button
       @click="ripple"
-      class="flex items-center justify-center outline-none rounded-xl gap-2 transition active:scale-90 shadow text-sm hover:opacity-90 active:opacity-100"
+      class="flex items-center justify-center outline-none rounded-xl gap-2 transition active:scale-90 shadow text-sm hover:opacity-90 active:opacity-100 disabled:opacity-40 disabled:transform-none"
       :class="bgColor, textColor,
       {
         'ui-btn-normal-only-icon': isNormal && onlyIcon,

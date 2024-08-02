@@ -19,7 +19,7 @@ const {push} = useRouter();
     </div>
 
     <div class="buttons-wrapper flex gap-4">
-      <Button only-icon bg-color="bg-blue-600" @click="() => {push(RoutesPath.create)}">
+      <Button only-icon bg-color="bg-blue-600" @click="() => {push(RoutesPath.select)}">
         <template v-slot:icon-left>
           <AddCardIcon class="fill-white"/>
         </template>
