@@ -53,7 +53,7 @@ const nextStage = () => {
 <template>
   <DefaultLayout>
     <div class="content px-5 flex align-center justify-center flex-col h-dvh gap-4">
-      <Logo/>
+      <Logo class="mb-3"/>
       <div class="text-center text-lg text-gray-500">Как добавить карту?</div>
 
       <BigButton v-for="({header, label, icon}, i) in modes" :header :label @click="changeMode($event, i)"
