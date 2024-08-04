@@ -28,11 +28,6 @@ const description = ref('')
         <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5">
           <SaleCard v-for="card in cards" :name="card" @click="drawerStore.openDrawer"/>
         </TouchList>
-
-
-        <Input v-model="name" placeholder="Как будет называться карта?"/>
-
-        <Textarea v-model="description" placeholder="Что можно сохранить о карте?"/>
       </div>
     </div>
   </DrawerLayout>

@@ -25,7 +25,7 @@ const {push} = useRouter();
         </template>
       </Button>
 
-      <Button only-icon>
+      <Button only-icon @click="() => {push(RoutesPath.settings)}">
         <template v-slot:icon-left>
           <SettingsIcon class="fill-gray-600"/>
         </template>

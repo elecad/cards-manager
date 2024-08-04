@@ -4,10 +4,15 @@ import DefaultLayout from "../layouts/DefaultLayout.vue";
 import Logo from "../components/Logo.vue";
 import Input from "../components/UI/Input.vue";
 import Textarea from "../components/UI/Textarea.vue";
-import {RoutesPath} from "../router/router.ts";
-import NextIcon from "../assets/icons/next.svg";
+import AddCardIcon from "../assets/icons/add_card.svg";
 import Button from "../components/UI/Button.vue";
 import BackIcon from "../assets/icons/back.svg";
+import {useRouter} from "vue-router";
+import {RoutesPath} from "../router/router.ts";
+
+
+const {push} = useRouter()
+
 </script>
 
 <template>
@@ -57,9 +62,9 @@ import BackIcon from "../assets/icons/back.svg";
           </template>
           Назад
         </Button>
-        <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1">
+        <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="() => push(RoutesPath.complete)">
           <template v-slot:icon-right>
-            <NextIcon class="fill-white w-4 h-4"/>
+            <AddCardIcon class="fill-white w-5 h-5"/>
           </template>
           Добавить карту
         </Button>
