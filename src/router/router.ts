@@ -6,7 +6,7 @@ import File from "../pages/File.vue";
 import SelectMode from "../pages/SelectMode.vue";
 import CreateForm from "../pages/CreateForm.vue";
 import CreateMassage from "../pages/CreateMassage.vue";
-import Settings from "../pages/Settings.vue";
+import Settings from "../pages/Settings/Settings.vue";
 
 export const RoutesPath = {
     main: "/",
