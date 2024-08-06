@@ -4,13 +4,29 @@ import Button from "./UI/Button.vue";
 import EditIcon from "../assets/icons/edit.svg"
 import Textarea from "./UI/Textarea.vue";
 import {computed, ref} from "vue";
+import {useRouter} from "vue-router";
+import {RoutesPath} from "../router/router.ts";
+import {useUIStore} from "../store/useUIStore.ts";
+
+
+const {push} = useRouter()
 
 const description = "Код списания: 236"
 const isSecret = ref(true)
 
+const drawerStore = useUIStore()
+
 const message = computed(() =>
     isSecret.value ? description.replace(/./g, "*") : description
 )
+
+const goEditPage = () => {
+
+  drawerStore.closeDrawer();
+  setTimeout(() => {
+    push(RoutesPath.edit)
+  }, 100)
+}
 
 </script>
 
@@ -23,7 +39,9 @@ const message = computed(() =>
       </div>
 
       <Button only-icon size="large"
-              bg-color="bg-slate-300">
+              bg-color="bg-slate-300"
+              @click="goEditPage"
+      >
         <template v-slot:icon-left>
           <EditIcon class="fill-black"/>
         </template>

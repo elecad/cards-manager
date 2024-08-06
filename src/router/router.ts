@@ -4,7 +4,7 @@ import EditCard from "../pages/EditCard.vue";
 import Camera from "../pages/Camera.vue";
 import File from "../pages/File.vue";
 import SelectMode from "../pages/SelectMode.vue";
-import CreateForm from "../pages/CreateForm.vue";
+import CreateForm from "../pages/CreateCard.vue";
 import CreateMassage from "../pages/CreateMassage.vue";
 import Settings from "../pages/Settings/Settings.vue";
 import Offline from "../pages/Settings/Offline.vue";

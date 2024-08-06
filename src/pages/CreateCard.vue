@@ -47,7 +47,7 @@ const {push} = useRouter()
       </div>
 
 
-      <div class="mb-10">
+      <div class="mb-8">
         <div class="text-sm font-medium mb-2">Дополнительные данные о карте:</div>
         <Textarea placeholder="Что можно сохранить о карте?"/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Здесь можно сохранить код списания
@@ -55,7 +55,7 @@ const {push} = useRouter()
         </div>
       </div>
 
-      <div class="flex items-center justify-evenly gap-6">
+      <div class="flex items-center justify-evenly gap-6 mb-4">
         <Button class="flex-2">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>

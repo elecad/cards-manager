@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
 import Drawer from "../components/UI/Drawer.vue";
-import AddIcon from "../assets/icons/add.svg"
-import Button from "../components/UI/Button.vue";
 import {useUIStore} from "../store/useUIStore.ts";
 import DrawerContent from "../components/DrawerContent.vue";
 import FloatingButton from "../components/FloatingButton.vue";

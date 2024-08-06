@@ -13,7 +13,6 @@ export const useUIStore = defineStore('drawer', () => {
 
     const closeDrawer = () => {
         console.log("Close")
-
         isOpen.value = false
     }
 

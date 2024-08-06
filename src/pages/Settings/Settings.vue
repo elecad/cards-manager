@@ -13,6 +13,7 @@ import CheckBox from "../../components/UI/CheckBox.vue";
 import OfflineIcon from "../../assets/icons/offline.svg";
 import InfoIcon from "../../assets/icons/info.svg"
 import HomeIcon from "../../assets/icons/home.svg"
+import ShareIcon from "../../assets/icons/share.svg"
 import BigButton from "../../components/UI/BigButtonWithTemplate.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../../router/router.ts";
@@ -67,17 +68,30 @@ const {push} = useRouter()
             </div>
           </div>
         </LargeButton>
-
-        <LargeButton @click="() => {push(RoutesPath.about)}">
+        
+        <LargeButton @click="() => {push(RoutesPath.main)}">
           <div class="flex items-center justify-center flex-col gap-2 text-center">
-            <InfoIcon class="w-8 h-8 fill-slate-400"/>
+            <ShareIcon class="w-8 h-8 fill-slate-400"/>
+            <div class="text-md font-medium">Поделиться картами</div>
+            <div class="text-xs font-medium text-slate-400">
+              Быстрый перенос данных на другое устройство
+            </div>
+          </div>
+        </LargeButton>
+      </div>
+
+      <LargeButton @click="() => {push(RoutesPath.about)}" class="mb-3">
+        <div class="flex items-center justify-between">
+          <div class="flex-1 mr-2">
             <div class="text-md font-medium">О приложении</div>
             <div class="text-xs font-medium text-slate-400">
               Информация о приложении и его авторе
             </div>
           </div>
-        </LargeButton>
-      </div>
+          <InfoIcon class="w-8 h-8 fill-slate-400"/>
+        </div>
+
+      </LargeButton>
 
       <hr class="mb-4"/>
 

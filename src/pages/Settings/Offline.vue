@@ -4,10 +4,7 @@ import Navigation from "../../components/Navigation.vue";
 import DefaultLayout from "../../layouts/DefaultLayout.vue";
 import CheckBox from "../../components/UI/CheckBox.vue";
 import Button from "../../components/UI/Button.vue";
-import NextIcon from "../../assets/icons/next.svg";
 import CheckIcon from "../../assets/icons/check.svg";
-import {RoutesPath} from "../../router/router.ts";
-import AddCardIcon from "../../assets/icons/add_card.svg";
 import BackIcon from "../../assets/icons/back.svg";
 </script>
 
