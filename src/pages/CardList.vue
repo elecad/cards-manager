@@ -7,10 +7,8 @@ import Search from "../components/Search.vue";
 import SaleCard from "../components/SaleCard.vue";
 import {useUIStore} from "../store/useUIStore.ts";
 import TouchList from "../components/UI/TouchList.vue";
-import Input from "../components/UI/Input.vue";
-import Textarea from "../components/UI/Textarea.vue";
 
-const cards = ref(['Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют'])
+const cards = ref(['Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют', 'Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют', 'Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют', 'Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют'])
 const drawerStore = useUIStore()
 
 const name = ref('')

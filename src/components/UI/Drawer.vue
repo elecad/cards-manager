@@ -38,12 +38,9 @@ const endSwipe = (event: TouchEvent) => {
 }
 
 watch(isOpen, () => {
-  console.log(animatedBackgroundElement.value)
   if (animatedBackgroundElement.value) {
-    // animatedBackgroundElement.value.classList.toggle('animated-background')
     document.body.classList.toggle('small-body')
   }
-  // document.body.classList.toggle("background-drawer")
 })
 
 </script>

@@ -13,8 +13,8 @@ const {push} = useRouter();
 
 <template>
   <div class="navigation-bar flex px-6 justify-between items-center">
-    <div class="flex hover:opacity-80 gap-1">
-      <WalletIcon width="22px" height="22px" style="fill: black;"/>
+    <div class="flex transition gap-1 active:scale-95  active::opacity-80" @click="push(RoutesPath.main)">
+      <WalletIcon width="22px" height="22px" class="fill-black"/>
       <p class="font-bold text-inherit">Картница</p>
     </div>
 

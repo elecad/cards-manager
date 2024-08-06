@@ -32,6 +32,10 @@ body {
     transition: transform .3s cubic-bezier(.32, .72, 0, 1), border-radius .3s cubic-bezier(.32, .72, 0, 1);
 }
 
+.small-body {
+    overflow: hidden;
+}
+
 .small-body > #app {
     transform: scale(0.95) translateY(-13px);
     border-radius: 10px;

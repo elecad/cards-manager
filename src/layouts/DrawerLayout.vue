@@ -4,6 +4,7 @@ import Drawer from "../components/UI/Drawer.vue";
 import AddIcon from "../assets/icons/add.svg"
 import Button from "../components/UI/Button.vue";
 import {useUIStore} from "../store/useUIStore.ts";
+import DrawerContent from "../components/DrawerContent.vue";
 
 const uiStore = useUIStore()
 
@@ -26,19 +27,7 @@ const uiStore = useUIStore()
 
     <div class="drawer-wrapper">
       <Drawer v-model="uiStore.isOpen">
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
-        <div>123</div>
+        <DrawerContent/>
       </Drawer>
 
     </div>
