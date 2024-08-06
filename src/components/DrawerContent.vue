@@ -19,7 +19,7 @@ const message = computed(() =>
     <div class="flex items-center justify-between mb-4">
       <div class="flex items-center justify-start gap-2">
         <img src="../assets/logo/magnit.png" alt="Лого карты" class="rounded w-6 h-6"/>
-        <div class="font-medium text-2xl">Планета здоровья</div>
+        <div class="card-name font-medium text-2xl">РазДваТриЧетыреПятьШ</div>
       </div>
 
       <Button only-icon size="large"
@@ -51,5 +51,16 @@ const message = computed(() =>
 </template>
 
 <style scoped>
+/* Анимация закрытия при переходе на мобильную версию */
+@media (max-width: 400px) {
+  .card-name {
+    @apply text-xl
+  }
+}
 
+@media (max-width: 375px) {
+  .card-name {
+    @apply text-sm;
+  }
+}
 </style>
