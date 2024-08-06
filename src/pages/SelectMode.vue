@@ -8,7 +8,7 @@ import {ref} from "vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import Logo from "../components/Logo.vue";
-import BigButton from "../components/UI/BigButton.vue";
+import BigButton from "../components/SelectItem.vue";
 import AddCameraIcon from "../assets/icons/add_camera.svg";
 import AddImageIcon from "../assets/icons/add_image.svg";
 

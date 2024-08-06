@@ -11,8 +11,14 @@ import DefaultLayout from "../../layouts/DefaultLayout.vue";
 import Navigation from "../../components/Navigation.vue";
 import CheckBox from "../../components/UI/CheckBox.vue";
 import OfflineIcon from "../../assets/icons/offline.svg";
-import BigButton from "../../components/UI/BigButton.vue";
 import InfoIcon from "../../assets/icons/info.svg"
+import HomeIcon from "../../assets/icons/home.svg"
+import BigButton from "../../components/UI/BigButtonWithTemplate.vue";
+import {useRouter} from "vue-router";
+import {RoutesPath} from "../../router/router.ts";
+import LargeButton from "../../components/UI/LargeButton.vue";
+
+const {push} = useRouter()
 </script>
 
 <template>
@@ -51,16 +57,44 @@ import InfoIcon from "../../assets/icons/info.svg"
         <CheckBox/>
       </div>
 
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <LargeButton @click="() => {push(RoutesPath.offlineSettings)}">
+          <div class="flex items-center justify-center flex-col gap-2 text-center">
+            <OfflineIcon class="w-8 h-8 fill-slate-400"/>
+            <div class="text-md font-medium">Оффлайн-доступ</div>
+            <div class="text-xs font-medium text-slate-400">
+              Доступ к web-приложению без активного подключения к Интернету
+            </div>
+          </div>
+        </LargeButton>
 
-      <div class="flex items-center justify-between gap-3">
-        <BigButton header="Оффлайн-доступ" class="px-1 h-32 !gap-1">
-          <OfflineIcon class="w-10 h-10 fill-slate-300"/>
-        </BigButton>
-        <BigButton header="О приложении" class="px-1 h-32 !gap-1">
-          <InfoIcon class="w-10 h-10 fill-slate-300"/>
-        </BigButton>
-
+        <LargeButton @click="() => {push(RoutesPath.about)}">
+          <div class="flex items-center justify-center flex-col gap-2 text-center">
+            <InfoIcon class="w-8 h-8 fill-slate-400"/>
+            <div class="text-md font-medium">О приложении</div>
+            <div class="text-xs font-medium text-slate-400">
+              Информация о приложении и его авторе
+            </div>
+          </div>
+        </LargeButton>
       </div>
+
+      <hr class="mb-4"/>
+
+      <LargeButton @click="() => {push(RoutesPath.main)}">
+        <div class="flex items-center justify-between">
+          <div class="flex-1 mr-2">
+            <div class="text-md font-medium">Вернуться на главный экран</div>
+            <div class="text-xs font-medium text-slate-400">
+              Закончили настройку?
+            </div>
+          </div>
+          <HomeIcon class="w-8 h-8 fill-slate-400"/>
+        </div>
+
+      </LargeButton>
+
+
     </div>
   </DefaultLayout>
 </template>

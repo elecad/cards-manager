@@ -7,6 +7,8 @@ import SelectMode from "../pages/SelectMode.vue";
 import CreateForm from "../pages/CreateForm.vue";
 import CreateMassage from "../pages/CreateMassage.vue";
 import Settings from "../pages/Settings/Settings.vue";
+import Offline from "../pages/Settings/Offline.vue";
+import About from "../pages/Settings/About.vue";
 
 export const RoutesPath = {
     main: "/",
@@ -16,7 +18,9 @@ export const RoutesPath = {
     camera: "/camera",
     file: "/file",
     complete: "/complete",
-    settings: "/settings"
+    settings: "/settings",
+    offlineSettings: "/settings/offline",
+    about: "/settings/about",
 }
 
 
@@ -28,7 +32,9 @@ export const routes: RouteRecordRaw[] = [
     {path: RoutesPath.file, component: File},
     {path: RoutesPath.select, component: SelectMode},
     {path: RoutesPath.complete, component: CreateMassage},
-    {path: RoutesPath.settings, component: Settings}
+    {path: RoutesPath.settings, component: Settings},
+    {path: RoutesPath.offlineSettings, component: Offline},
+    {path: RoutesPath.about, component: About},
 ]
 
 export const router = createRouter({

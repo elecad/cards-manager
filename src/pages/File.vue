@@ -5,7 +5,7 @@ import Logo from "../components/Logo.vue";
 import BackIcon from "../assets/icons/back.svg";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import ImageSearchIcon from "../assets/icons/image_search.svg";
-import BigButton from "../components/UI/BigButton.vue";
+import BigButton from "../components/SelectItem.vue";
 import {useRouter} from "vue-router";
 
 const {back} = useRouter()
