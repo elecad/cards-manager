@@ -47,7 +47,7 @@ watch(isOpen, () => {
 
 <template>
   <Teleport to="body">
-    <div class="drawer-root">
+    <div class="drawer-root z-20">
       <Transition>
         <div class="drawer-overlay fixed inset-0 bg-black/30" @click="isOpen = false"
              v-if="isOpen"></div>
