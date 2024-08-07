@@ -9,7 +9,13 @@ onMounted(() => {
     return
   const sortable = new Sortable(rootElement.value, {
     animation: 200,
-    delay: 300
+    delay: 300,
+    onSort(event) {
+      console.log(event)
+    },
+    // onEnd: (event) => {
+    //   console.log(event)
+    // }
 
   });
 })

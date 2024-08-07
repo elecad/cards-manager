@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dexie": "^4.0.8",
     "pinia": "^2.2.0",
     "sortablejs": "^1.15.2",
     "vaul-vue": "^0.2.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@types/sortablejs": "^1.15.8",
+    "@types/uuid": "^10.0.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.40",

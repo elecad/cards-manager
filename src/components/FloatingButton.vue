@@ -34,12 +34,13 @@ const {closed} = defineProps<FloatingButtonProps>()
 
 .v-enter-active,
 .v-leave-active {
-  @apply transition-transform;
+  @apply transition;
   @apply duration-200;
 }
 
 .v-enter-from,
 .v-leave-to {
-  transform: translateX(200%);
+  transform: translateX(150%);
+  opacity: 0;
 }
 </style>

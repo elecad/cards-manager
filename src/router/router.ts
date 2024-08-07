@@ -9,6 +9,7 @@ import CreateMassage from "../pages/CreateMassage.vue";
 import Settings from "../pages/Settings/Settings.vue";
 import Offline from "../pages/Settings/Offline.vue";
 import About from "../pages/Settings/About.vue";
+import Share from "../pages/Settings/Share.vue";
 
 export const RoutesPath = {
     main: "/",
@@ -21,6 +22,7 @@ export const RoutesPath = {
     settings: "/settings",
     offlineSettings: "/settings/offline",
     about: "/settings/about",
+    share: "/settings/share"
 }
 
 
@@ -35,6 +37,7 @@ export const routes: RouteRecordRaw[] = [
     {path: RoutesPath.settings, component: Settings},
     {path: RoutesPath.offlineSettings, component: Offline},
     {path: RoutesPath.about, component: About},
+    {path: RoutesPath.share, component: Share},
 ]
 
 export const router = createRouter({

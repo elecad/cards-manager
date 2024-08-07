@@ -68,8 +68,8 @@ const {push} = useRouter()
             </div>
           </div>
         </LargeButton>
-        
-        <LargeButton @click="() => {push(RoutesPath.main)}">
+
+        <LargeButton @click="() => {push(RoutesPath.share)}">
           <div class="flex items-center justify-center flex-col gap-2 text-center">
             <ShareIcon class="w-8 h-8 fill-slate-400"/>
             <div class="text-md font-medium">Поделиться картами</div>
