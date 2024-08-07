@@ -75,8 +75,8 @@ const store = useCardStore()
 
 
 const action = async () => {
-  // store.add({name: "Тестовая карта", barcode: "123", description: "Тест", sharedData: {data: "123", type: "123"}})
-  console.log(store.get(5))
+  store.add({name: "Тестовая карта", barcode: "123", description: "Тест", sharedData: {data: "123", type: "123"}})
+  // console.log(store.get(5))
 }
 
 </script>

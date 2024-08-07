@@ -7,15 +7,20 @@ export const useCardStore = defineStore('card', () => {
     const {getAllRecord, createRecord, nextRecordID, updateRecord, removeRecord} = cardService()
     const cards = ref<ISaleCard[]>([])
     const isLoading = ref(true)
+    const needInit = ref(true)
 
     const init = async () => {
-        const cardsFromDB = await getAllRecord();
-        console.log(cardsFromDB)
-        cards.value = cardsFromDB
-        console.log(cards)
-        isLoading.value = false
+        if (needInit.value) {
+            const cardsFromDB = await getAllRecord();
+            cards.value = cardsFromDB
+            console.log(cards)
+            isLoading.value = false
+            needInit.value = false
+        }
     }
-    init();
+
+    init()
+
 
     const add = async (newCard: Omit<ISaleCard, 'id' | 'position'>) => {
         const position = await nextRecordID()
@@ -36,5 +41,5 @@ export const useCardStore = defineStore('card', () => {
     }
 
 
-    return {cards, isLoading, add, get, update, remove}
+    return {cards, isLoading, add, get, update, remove, init}
 })

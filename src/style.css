@@ -41,6 +41,10 @@ body {
     border-radius: 10px;
 }
 
+#app {
+    min-height: 100dvh;
+}
+
 @media (min-width: 550px) {
     body {
         margin-left: calc((100dvw - 550px) / 2);

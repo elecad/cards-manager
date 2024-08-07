@@ -1,19 +1,32 @@
 <script setup lang="ts">
 import CardOffIcon from "../assets/icons/card_off.svg"
+import Button from "./UI/Button.vue";
+import {RoutesPath} from "../router/router.ts";
+import AddIcon from "../assets/icons/add_card.svg";
+import {useRouter} from "vue-router";
+
+const {push} = useRouter()
 </script>
 
+
 <template>
-  Нет карт
-  <div class="empty-card-list flex items-center justify-center flex-col text-gray-500 gap-9 mt-6">
+  <div class="empty-card-list flex items-center justify-center flex-col text-gray-500 gap-9 mt-20">
     <div class="flex gap-3 flex-col justify-center items-center">
-      <div class="text-xl">Тут ничего нет...</div>
-      <CardOffIcon width="72px" height="72px" style="fill: rgba(82, 82, 91, 0.8);"/>
-      <div class="text-sm">Ниже можно добавить новую карту</div>
+
+      <CardOffIcon class="fill-gray-400 w-20 h-20"/>
+      <div class="text-sm text-center">
+        <div class="text-xl">Картница пуста...</div>
+        <div>Ниже можно добавить новую карту</div>
+      </div>
+
     </div>
 
-    <button class="text-white px-3 py-2 rounded-xl text-sm" style="background-color: rgb(0, 111, 238)">Добавить новую
-      карту
-    </button>
+    <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="() => push(RoutesPath.select)">
+      <template v-slot:icon-right>
+        <AddIcon class="fill-white w-5 h-5"/>
+      </template>
+      Добавить карту
+    </Button>
   </div>
 </template>
 

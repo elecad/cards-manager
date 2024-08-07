@@ -10,9 +10,10 @@ import Settings from "../pages/Settings/Settings.vue";
 import Offline from "../pages/Settings/Offline.vue";
 import About from "../pages/Settings/About.vue";
 import Share from "../pages/Settings/Share.vue";
+import Splash from "../pages/Splash.vue";
 
 export const RoutesPath = {
-    main: "/",
+    main: "/list",
     create: "/create",
     select: "/select",
     edit: "/edit",
@@ -22,7 +23,8 @@ export const RoutesPath = {
     settings: "/settings",
     offlineSettings: "/settings/offline",
     about: "/settings/about",
-    share: "/settings/share"
+    share: "/settings/share",
+    splash: "/"
 }
 
 
@@ -38,6 +40,7 @@ export const routes: RouteRecordRaw[] = [
     {path: RoutesPath.offlineSettings, component: Offline},
     {path: RoutesPath.about, component: About},
     {path: RoutesPath.share, component: Share},
+    {path: RoutesPath.splash, component: Splash},
 ]
 
 export const router = createRouter({

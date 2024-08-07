@@ -7,9 +7,11 @@ import Search from "../components/Search.vue";
 import SaleCard from "../components/SaleCard.vue";
 import {useUIStore} from "../store/useUIStore.ts";
 import TouchList from "../components/UI/TouchList.vue";
+import {useCardStore} from "../store/useCardStore.ts";
+import EmptyCardList from "../components/EmptyCardList.vue";
 
-const cards = ref(['Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют', 'Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют', 'Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют', 'Магнит', 'Планета Здоровья', 'Пятёрочка', 'Абсолют'])
 const drawerStore = useUIStore()
+const cardStore = useCardStore()
 
 
 </script>
@@ -21,9 +23,17 @@ const drawerStore = useUIStore()
       <div class="content px-5 pt-4">
         <Search/>
         <h3 class="font-bold mt-6 mb-5">Мои карты</h3>
-        <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20">
-          <SaleCard v-for="card in cards" :name="card" @click="drawerStore.openDrawer"/>
-        </TouchList>
+
+        <!--        <Loading/>-->
+
+
+        <EmptyCardList v-if="cardStore.cards.length === 0"/>
+        <template v-else>
+          <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20">
+            <SaleCard v-for="card in cardStore.cards" :name="card.name" @click="drawerStore.openDrawer"/>
+          </TouchList>
+        </template>
+
       </div>
     </div>
   </DrawerLayout>
