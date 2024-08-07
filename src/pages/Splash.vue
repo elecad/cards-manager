@@ -19,11 +19,11 @@ initApp()
 </script>
 
 <template>
-  <div class="splash w-screen h-dvh bg-blue-700 flex items-center justify-center flex-col gap-2">
-    <WalletIcon class="loading-icon fill-white w-20 h-20"/>
+  <div class="splash w-screen h-dvh flex items-center justify-center flex-col gap-2">
+    <WalletIcon class="loading-icon fill-gray-300 w-16 h-16"/>
     <div class="text-center">
-      <div class="text-3xl text-white font-bold">Картница</div>
-      <div class="text-sm text-white">Удобно, быстро и без Интернета</div>
+      <div class="text-3xl text-gray-900 font-light">Картница</div>
+      <div class="text-sm text-gray-500">Удобно, быстро и без Интернета</div>
     </div>
   </div>
 </template>
