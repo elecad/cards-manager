@@ -16,7 +16,10 @@
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0",
-    "vue3-sortablejs": "^1.0.7"
+    "vue3-sortablejs": "^1.0.7",
+    "jsbarcode": "^3.11.6",
+    "qrcode": "^1.5.3",
+    "barcode-detector": "^2.2.7"
   },
   "devDependencies": {
     "@types/sortablejs": "^1.15.8",
