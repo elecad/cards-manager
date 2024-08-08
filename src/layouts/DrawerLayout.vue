@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
 import Drawer from "../components/UI/Drawer.vue";
-import {useUIStore} from "../store/useUIStore.ts";
+import {useDrawer} from "../store/useDrawer.ts";
 import DrawerContent from "../components/DrawerContent.vue";
 import FloatingButton from "../components/FloatingButton.vue";
 
-const uiStore = useUIStore()
+const uiStore = useDrawer()
 
 </script>
 

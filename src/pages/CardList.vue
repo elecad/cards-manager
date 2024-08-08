@@ -5,12 +5,12 @@ import DrawerLayout from "../layouts/DrawerLayout.vue";
 import Navigation from "../components/Navigation.vue";
 import Search from "../components/Search.vue";
 import SaleCard from "../components/SaleCard.vue";
-import {useUIStore} from "../store/useUIStore.ts";
+import {useDrawer} from "../store/useDrawer.ts";
 import TouchList from "../components/UI/TouchList.vue";
 import {useCardStore} from "../store/useCardStore.ts";
 import EmptyCardList from "../components/EmptyCardList.vue";
 
-const drawerStore = useUIStore()
+const drawerStore = useDrawer()
 const cardStore = useCardStore()
 
 

@@ -3,40 +3,32 @@
 import Button from "../components/UI/Button.vue";
 import Logo from "../components/Logo.vue";
 import BackIcon from "../assets/icons/back.svg";
-import CancelIcon from "../assets/icons/cancel.svg";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
+import Alert from "../components/UI/Alert.vue";
 import ImageSearchIcon from "../assets/icons/image_search.svg";
 import BigButton from "../components/SelectItem.vue";
 import {useRouter} from "vue-router";
 import {ref} from "vue";
 import {useFile} from "../hooks/useFile.ts";
 import {useBarcode} from "../hooks/useBarcode.ts";
+import {useAlert} from "../store/useAlert.ts";
 
 const {back} = useRouter()
 const {fileToBlob} = useFile()
 const {detect, generate} = useBarcode()
 const fileElement = ref<HTMLInputElement | null>(null)
-const isVisible = ref(false)
+
+const {openAlert} = useAlert()
 
 const supportedFormats = [
   "image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"
 ]
-
-const messageText = ref("Штрих-код не найден")
 
 const clickHandler = () => {
   if (!fileElement.value)
     return
   fileElement.value.click()
 
-}
-
-const alert = (text: string) => {
-  messageText.value = text
-  isVisible.value = true
-  setTimeout(() => {
-    isVisible.value = false
-  }, 1500)
 }
 
 const loadHandler = async (event: Event) => {
@@ -49,7 +41,7 @@ const loadHandler = async (event: Event) => {
     try {
       const codes = await detect(blob)
       if (!codes.length) {
-        alert("Штрих-код не найден")
+        openAlert("Штрих-код не найден")
         return
       }
       const code = codes[0]
@@ -57,7 +49,7 @@ const loadHandler = async (event: Event) => {
       console.log(base64)
     } catch (e) {
       console.error(e)
-      alert("Данный формат файлов не поддерживается")
+      openAlert("Данный формат файлов не поддерживается")
     }
 
 
@@ -91,25 +83,10 @@ const loadHandler = async (event: Event) => {
         </Button>
       </div>
     </div>
-
-    <div
-        class="alert-wrapper bg-red-500 rounded-t-md shadow-sm p-2 flex items-center justify-center gap-3 w-full transition-transform duration-500"
-        :class="{'open': isVisible}"
-    >
-      <CancelIcon class="fill-white w-6 h-6"/>
-      <div class="text-md text-white text-center">{{ messageText }}</div>
-    </div>
+    <Alert/>
   </DefaultLayout>
 </template>
 
 <style scoped>
-.alert-wrapper {
-  position: fixed;
-  bottom: 0;
-  transform: translateY(100%);
-}
 
-.alert-wrapper.open {
-  transform: translateY(0);
-}
 </style>

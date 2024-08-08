@@ -6,7 +6,7 @@ import Textarea from "./UI/Textarea.vue";
 import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
-import {useUIStore} from "../store/useUIStore.ts";
+import {useDrawer} from "../store/useDrawer.ts";
 
 
 const {push} = useRouter()
@@ -14,7 +14,7 @@ const {push} = useRouter()
 const description = "Код списания: 236"
 const isSecret = ref(true)
 
-const drawerStore = useUIStore()
+const drawerStore = useDrawer()
 
 const message = computed(() =>
     isSecret.value ? description.replace(/./g, "*") : description

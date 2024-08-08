@@ -1,10 +1,9 @@
 import {defineStore} from "pinia";
 import {ref} from "vue";
 
-export const useUIStore = defineStore('drawer', () => {
+export const useDrawer = defineStore('drawer', () => {
 
     const isOpen = ref(false)
-
 
     const openDrawer = () => {
         console.log("Open")
@@ -15,7 +14,5 @@ export const useUIStore = defineStore('drawer', () => {
         console.log("Close")
         isOpen.value = false
     }
-
-
     return {isOpen, openDrawer, closeDrawer}
 })
