@@ -27,7 +27,7 @@ const cardStore = useCardStore()
         <!--        <Loading/>-->
 
 
-        <EmptyCardList v-if="cardStore.cards.length === 0"/>
+        <EmptyCardList v-if="cardStore.cards.length === 0 && !cardStore.isLoading"/>
         <template v-else>
           <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20">
             <SaleCard v-for="card in cardStore.cards" :name="card.name" @click="drawerStore.openDrawer"/>

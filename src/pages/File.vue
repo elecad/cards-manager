@@ -9,24 +9,59 @@ import ImageSearchIcon from "../assets/icons/image_search.svg";
 import BigButton from "../components/SelectItem.vue";
 import {useRouter} from "vue-router";
 import {ref} from "vue";
+import {useFile} from "../hooks/useFile.ts";
+import {useBarcode} from "../hooks/useBarcode.ts";
 
 const {back} = useRouter()
+const {fileToBlob} = useFile()
+const {detect, generate} = useBarcode()
 const fileElement = ref<HTMLInputElement | null>(null)
 const isVisible = ref(false)
+
+const supportedFormats = [
+  "image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"
+]
+
+const messageText = ref("Штрих-код не найден")
 
 const clickHandler = () => {
   if (!fileElement.value)
     return
   fileElement.value.click()
-  alert()
 
 }
 
-const alert = () => {
+const alert = (text: string) => {
+  messageText.value = text
   isVisible.value = true
   setTimeout(() => {
     isVisible.value = false
   }, 1500)
+}
+
+const loadHandler = async (event: Event) => {
+  const element = event.target as HTMLInputElement
+  if (!element.files)
+    return
+
+  const file = element.files[0];
+  fileToBlob(file, async (blob) => {
+    try {
+      const codes = await detect(blob)
+      if (!codes.length) {
+        alert("Штрих-код не найден")
+        return
+      }
+      const code = codes[0]
+      const base64 = await generate(code.rawValue, code.format)
+      console.log(base64)
+    } catch (e) {
+      console.error(e)
+      alert("Данный формат файлов не поддерживается")
+    }
+
+
+  })
 }
 
 </script>
@@ -41,10 +76,11 @@ const alert = () => {
           header="Выбор изображения"
           :labels="['Нажмите, чтобы выбрать изображение для поиска', 'Поддерживаются только изображения с штрих-кодом карты']">
         <ImageSearchIcon class="!w-10 !h-10"/>
-        <input type="file" accept="image/*" class="hidden" ref="fileElement">
+        <input @change="loadHandler" type="file" :accept="supportedFormats.join(',')"
+               class="hidden"
+               ref="fileElement">
 
       </BigButton>
-
 
       <div class="flex items-center justify-evenly gap-6 mt-5">
         <Button class="flex-1" @click="back">
@@ -61,7 +97,7 @@ const alert = () => {
         :class="{'open': isVisible}"
     >
       <CancelIcon class="fill-white w-6 h-6"/>
-      <div class="text-md text-white">Штрих-код не найден</div>
+      <div class="text-md text-white text-center">{{ messageText }}</div>
     </div>
   </DefaultLayout>
 </template>

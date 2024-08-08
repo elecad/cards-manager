@@ -9,19 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "barcode-detector": "^2.2.7",
     "dexie": "^4.0.8",
+    "jsbarcode": "^3.11.6",
     "pinia": "^2.2.0",
+    "qrcode": "^1.5.3",
     "sortablejs": "^1.15.2",
     "vaul-vue": "^0.2.0",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0",
-    "vue3-sortablejs": "^1.0.7",
-    "jsbarcode": "^3.11.6",
-    "qrcode": "^1.5.3",
-    "barcode-detector": "^2.2.7"
+    "vue3-sortablejs": "^1.0.7"
   },
   "devDependencies": {
+    "@types/qrcode": "^1.5.5",
     "@types/sortablejs": "^1.15.8",
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-vue": "^5.0.5",

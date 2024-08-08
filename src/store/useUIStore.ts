@@ -17,12 +17,5 @@ export const useUIStore = defineStore('drawer', () => {
     }
 
 
-    const isEdit = ref(false)
-
-    const changeEdit = () => {
-        isEdit.value = !isEdit.value
-    }
-
-
-    return {isOpen, openDrawer, closeDrawer, isEdit, changeEdit}
+    return {isOpen, openDrawer, closeDrawer}
 })
