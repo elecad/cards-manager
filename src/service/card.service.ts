@@ -17,12 +17,12 @@ export interface ISaleCard {
     name: string
     description: string
     barcode: string
+    data: string
     position: number
-    sharedData: {
-        type: string
-        data: string
-    }
+    type: string
 }
+
+export type ISaleCardTransport = Omit<ISaleCard, 'id' | 'name' | 'description' | 'position'>
 
 
 export const cardService = () => {

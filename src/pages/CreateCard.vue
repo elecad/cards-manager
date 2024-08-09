@@ -9,9 +9,16 @@ import Button from "../components/UI/Button.vue";
 import BackIcon from "../assets/icons/back.svg";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
+import {ISaleCardTransport} from "../service/card.service.ts";
 
 
 const {push} = useRouter()
+const state = history.state.prevDate as ISaleCardTransport
+
+if (!state) {
+  push(RoutesPath.error)
+}
+console.log(state)
 
 </script>
 
@@ -31,7 +38,7 @@ const {push} = useRouter()
 
       <div class="mb-5">
         <div class="text-sm font-medium mb-2">Номер карты:</div>
-        <Input placeholder="Тут будет отображаться номер карты" readonly/>
+        <Input v-model="state.data" placeholder="Тут будет отображаться номер карты" readonly/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Если вдруг номер
           отличается от того, что есть на Вашей карте, просканируйте карту снова!
         </div>
@@ -39,7 +46,7 @@ const {push} = useRouter()
 
       <div class="mb-5 flex items-center justify-center gap-3">
         <div class="rounded-2xl shadow-sm p-1 border-2">
-          <img src="../assets/Barcode.png" alt="Штрих-код"/>
+          <img :src="state.barcode" alt="Штрих-код"/>
         </div>
         <div class="rounded-2xl shadow-sm p-3 border-2">
           <img src="../assets/logo/lenta.png" alt="Лого карты" class="rounded"/>
