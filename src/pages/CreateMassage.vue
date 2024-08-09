@@ -8,8 +8,32 @@ import SaleCard from "../components/SaleCard.vue";
 import ScaleTransition from "../components/UI/ScaleTransition.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
+import {ISaleCard} from "../service/card.service.ts";
+import {computed, ref} from "vue";
 
 const {push} = useRouter()
+
+const name = ref("")
+const iconName = ref("")
+
+
+const routerState = history.state.prevDate as Omit<ISaleCard, 'id'>
+
+console.log(routerState)
+
+if (!routerState) {
+  console.log("Ошибка!!")
+  push(RoutesPath.error)
+
+} else {
+  name.value = routerState.name
+  iconName.value = routerState.icon
+}
+const iconPath = computed(() =>
+    routerState ?
+        `/src/assets/logo/${iconName.value}` : ""
+)
+
 </script>
 
 <template>
@@ -18,7 +42,7 @@ const {push} = useRouter()
     <div class="content px-5 flex-col flex items-stretch justify-center">
       <div class="card-wrapper px-8">
         <ScaleTransition :duration="300">
-          <SaleCard name="Магнит"/>
+          <SaleCard :name="name" :iconPath="iconPath"/>
         </ScaleTransition>
       </div>
       <div class="mt-10 mb-6">

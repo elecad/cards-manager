@@ -20,6 +20,7 @@ export interface ISaleCard {
     data: string
     position: number
     type: string
+    icon: string
 }
 
 export type ISaleCardTransport = Omit<ISaleCard, 'id' | 'name' | 'description' | 'position'>

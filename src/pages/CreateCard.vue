@@ -10,15 +10,79 @@ import BackIcon from "../assets/icons/back.svg";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {ISaleCardTransport} from "../service/card.service.ts";
+import {computed, ref, watch} from "vue";
+import {notFoundIcon, saleCardIconList} from "../config/cardPatterns.ts";
+import {debounce} from "../helpers/Debounce.ts";
+import Alert from "../components/UI/Alert.vue";
+import {useAlert} from "../store/useAlert.ts";
+import {ICreateCard, useCardStore} from "../store/useCardStore.ts";
 
 
 const {push} = useRouter()
-const state = history.state.prevDate as ISaleCardTransport
+const data = ref("")
+const barcode = ref("")
 
-if (!state) {
+const routerState = history.state.prevDate as ISaleCardTransport
+
+
+if (!routerState) {
   push(RoutesPath.error)
+} else {
+  data.value = routerState.data
+  barcode.value = routerState.barcode
 }
-console.log(state)
+
+const {openAlert, closeAlert} = useAlert()
+const name = ref("")
+const description = ref("")
+const cardState = useCardStore()
+const iconName = ref(notFoundIcon)
+const isValidMinLenght = computed(() => name.value.length > 0)
+const isValidMaxLenght = computed(() => name.value.length < 21)
+
+
+watch(isValidMaxLenght, (newValue) => {
+  if (!newValue)
+    openAlert("Название должно быть меньше")
+  else
+    closeAlert()
+
+})
+
+const iconPath = computed(() => `/src/assets/logo/${iconName.value}`)
+
+const inputHandler = debounce(() => {
+  const findIcon = saleCardIconList.find((el) => {
+    const nameFix = name.value.trim().toLowerCase();
+    const patternFix = el.pattern.trim().toLowerCase();
+    return nameFix.includes(patternFix);
+  });
+  if (findIcon)
+    iconName.value = findIcon.file
+  else
+    iconName.value = notFoundIcon
+}, 300)
+
+
+const createHandler = async () => {
+  const isValid = isValidMinLenght.value && isValidMaxLenght.value
+  if (!isValid) {
+    return
+  }
+
+  const newCard: ICreateCard =
+      {
+        name: name.value,
+        description: description.value,
+        type: routerState.type,
+        barcode: routerState.barcode,
+        data: routerState.data,
+        icon: iconName.value
+      }
+  await cardState.add(newCard)
+
+  await push({path: RoutesPath.complete, state: {prevDate: newCard}})
+}
 
 </script>
 
@@ -30,7 +94,7 @@ console.log(state)
 
       <div class="mb-3">
         <div class="text-sm font-medium mb-2">Название:</div>
-        <Input placeholder="Как будет называться карта?"/>
+        <Input v-model="name" placeholder="Как будет называться карта?" @change="inputHandler"/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">
           Осмысленное название позволяет найти иконку. Рекомендуется использовать название магазина
         </div>
@@ -38,7 +102,7 @@ console.log(state)
 
       <div class="mb-5">
         <div class="text-sm font-medium mb-2">Номер карты:</div>
-        <Input v-model="state.data" placeholder="Тут будет отображаться номер карты" readonly/>
+        <Input v-model="data" placeholder="Тут будет отображаться номер карты" readonly/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Если вдруг номер
           отличается от того, что есть на Вашей карте, просканируйте карту снова!
         </div>
@@ -46,21 +110,22 @@ console.log(state)
 
       <div class="mb-5 flex items-center justify-center gap-3">
         <div class="rounded-2xl shadow-sm p-1 border-2">
-          <img :src="state.barcode" alt="Штрих-код"/>
+          <img :src="barcode" alt="Штрих-код"/>
         </div>
         <div class="rounded-2xl shadow-sm p-3 border-2">
-          <img src="../assets/logo/lenta.png" alt="Лого карты" class="rounded"/>
+          <img :src="iconPath" alt="Лого карты" class="rounded"/>
         </div>
       </div>
 
 
       <div class="mb-8">
         <div class="text-sm font-medium mb-2">Дополнительные данные о карте:</div>
-        <Textarea placeholder="Что можно сохранить о карте?"/>
+        <Textarea v-model="description" placeholder="Что можно сохранить о карте?"/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Здесь можно сохранить код списания
           бонусов, дату создания или другую дополнительную информацию
         </div>
       </div>
+
 
       <div class="flex items-center justify-evenly gap-6 mb-4">
         <Button class="flex-2">
@@ -69,7 +134,8 @@ console.log(state)
           </template>
           Назад
         </Button>
-        <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="() => push(RoutesPath.complete)">
+        <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="createHandler"
+                :disabled="!(isValidMinLenght && isValidMaxLenght)">
           <template v-slot:icon-right>
             <AddCardIcon class="fill-white w-5 h-5"/>
           </template>
@@ -77,7 +143,7 @@ console.log(state)
         </Button>
       </div>
     </div>
-
+    <Alert/>
   </DefaultLayout>
 </template>
 

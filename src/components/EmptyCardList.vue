@@ -10,18 +10,18 @@ const {push} = useRouter()
 
 
 <template>
-  <div class="empty-card-list flex items-center justify-center flex-col text-gray-500 gap-9 mt-20">
+  <div class="empty-card-list flex items-center justify-center flex-col text-gray-500 gap-9 h-[50dvh]">
     <div class="flex gap-3 flex-col justify-center items-center">
 
       <CardOffIcon class="fill-gray-400 w-20 h-20"/>
       <div class="text-sm text-center">
-        <div class="text-xl">Картница пуста...</div>
-        <div>Ниже можно добавить новую карту</div>
+        <div class="text-xl mb-1">Картница пуста...</div>
+        <div class="text-sm">Ниже можно добавить новую карту</div>
       </div>
 
     </div>
 
-    <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="() => push(RoutesPath.select)">
+    <Button bg-color="bg-blue-600" text-color="text-white" @click="() => push(RoutesPath.select)">
       <template v-slot:icon-right>
         <AddIcon class="fill-white w-5 h-5"/>
       </template>

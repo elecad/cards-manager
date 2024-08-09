@@ -3,11 +3,10 @@ export interface IFileIcons {
     file: string;
 }
 
-export const path = "/logo"
 
-export const notFoundIcon = "not-found.png";
+export const notFoundIcon: string = "not-found.png";
 
-export const fileIcons: IFileIcons[] = [
+export const saleCardIconList: IFileIcons[] = [
     {
         pattern: "Магнит".toLowerCase(),
         file: "magnit.png",
@@ -60,4 +59,75 @@ export const fileIcons: IFileIcons[] = [
         pattern: "Ostin".toLowerCase(),
         file: "ostin.png",
     },
+    {
+        pattern: "Линия".toLowerCase(),
+        file: "linia.png",
+    },
+    {
+        pattern: "Народная карта".toLowerCase(),
+        file: "linia.png",
+    },
+    {
+        pattern: "Европа".toLowerCase(),
+        file: "evropa.png",
+    },
+    {
+        pattern: "Спортмастер".toLowerCase(),
+        file: "sportmaster.png",
+    },
+    {
+        pattern: "Эльдорадо".toLowerCase(),
+        file: "eldorado.png",
+    },
+    {
+        pattern: "Детский мир".toLowerCase(),
+        file: "detskij-mir.png",
+    },
+    {
+        pattern: "Читай город".toLowerCase(),
+        file: "chitaj-gorod.png",
+    },
+    {
+        pattern: "Новый книжный".toLowerCase(),
+        file: "chitaj-gorod.png",
+    },
+    {
+        pattern: "Funday".toLowerCase(),
+        file: "funday.png",
+    },
+    {
+        pattern: "Fun day".toLowerCase(),
+        file: "funday.png",
+    },
+    {
+        pattern: "Фандей".toLowerCase(),
+        file: "funday.png",
+    },
+    {
+        pattern: "Фан дей".toLowerCase(),
+        file: "funday.png",
+    },
+    {
+        pattern: "Фандай".toLowerCase(),
+        file: "funday.png",
+    },
+    {
+        pattern: "Фан дай".toLowerCase(),
+        file: "funday.png",
+    },
+    {
+        pattern: "Вита".toLowerCase(),
+        file: "vite.png",
+    },
+
+    {
+        pattern: "Аптека Вита".toLowerCase(),
+        file: "vite.png",
+    },
+
+    {
+        pattern: "Вита Аптека".toLowerCase(),
+        file: "vite.png",
+    },
+
 ];

@@ -7,13 +7,17 @@ interface InputProps {
 const {placeholder, readonly} = defineProps<InputProps>();
 
 const model = defineModel()
+const emit = defineEmits<{
+  (e: 'change'): void
+}>()
 </script>
 
 <template>
   <div class="input-wrapper border-2 rounded-[10px] px-3 transition shadow-sm">
     <input
         v-model="model"
-        class="w-full h-10 outline-none  text-sm"
+        class="w-full h-10 outline-none text-sm"
+        @input="() => {emit('change')}"
         :placeholder
         :readonly
     />

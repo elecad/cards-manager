@@ -7,7 +7,8 @@ interface ButtonProps {
   onlyIcon?: boolean,
   bgColor?: string,
   textColor?: string,
-  iconFill?: string
+  iconFill?: string,
+  disabled?: boolean
 }
 
 
@@ -15,7 +16,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   size: "normal",
   bgColor: "bg-default",
   textColor: "text-gray-800",
-  onlyIcon: false
+  onlyIcon: false,
+  disabled: false
 })
 
 const isNormal = computed(() => props.size == "normal")
@@ -36,7 +38,8 @@ const ripple = () => {
         'ui-btn-large-only-icon': !isNormal && onlyIcon,
         'p-4': !isNormal && !onlyIcon,
         'p-3': isNormal && !onlyIcon,
-      }">
+      }"
+      :disabled>
     <slot name="icon-left"/>
     <slot/>
     <slot name="icon-right"/>

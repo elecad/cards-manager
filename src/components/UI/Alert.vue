@@ -12,7 +12,7 @@ const alertState = useAlert()
       :class="{'open': alertState.isOpen}"
   >
     <CancelIcon class="fill-white w-6 h-6"/>
-    <div class="text-md text-white text-center">{{ alertState.message }}</div>
+    <div class="alert-message text-md text-white text-center">{{ alertState.message }}</div>
   </div>
 </template>
 
@@ -25,5 +25,11 @@ const alertState = useAlert()
 
 .alert-wrapper.open {
   transform: translateY(0);
+}
+
+@media (max-width: 370px) {
+  .alert-message {
+    @apply text-xs
+  }
 }
 </style>
