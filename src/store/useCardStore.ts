@@ -4,7 +4,6 @@ import {cardService, ISaleCard, ISaleCardTransport} from "../service/card.servic
 import {notFoundIcon} from "../config/cardPatterns.ts";
 
 export type ICreateCard = Omit<ISaleCard, 'id' | 'position'>
-export type IUpdateCard = Omit<ISaleCard, 'id' | 'position'>
 
 export const PlaceholderCard: ISaleCard = {
     id: 0,
@@ -30,18 +29,13 @@ export const useCardStore = defineStore('card', () => {
     const selectedCard = ref<ISaleCard>(PlaceholderCard)
     const createdData = ref<ISaleCardTransport>(PlaceholderCreatedData)
     const isLoading = ref(true)
-    const needInit = ref(true)
 
-    const init = async () => {
-        if (needInit.value) {
-            cards.value = await getAllRecord()
-            isLoading.value = false
-            needInit.value = false
-        }
+
+    const getAll = async () => {
+        isLoading.value = true
+        cards.value = await getAllRecord()
+        isLoading.value = false
     }
-
-    init()
-
 
     const add = async (newCard: ICreateCard) => {
         const position = await nextRecordID()
@@ -53,8 +47,8 @@ export const useCardStore = defineStore('card', () => {
         return cards.value.find((el) => el.id === id)
     }
 
-    const update = (id: number, newCard: IUpdateCard) => {
-        return updateRecord(id, newCard)
+    const update = (newCard: ISaleCard) => {
+        return updateRecord(newCard.id, newCard)
     }
 
     const remove = (id: number) => {
@@ -70,5 +64,5 @@ export const useCardStore = defineStore('card', () => {
     }
 
 
-    return {cards, isLoading, add, get, update, remove, init, select, selectedCard, createdData, saveCreateData}
+    return {cards, isLoading, add, get, update, remove, select, selectedCard, createdData, saveCreateData, getAll}
 })

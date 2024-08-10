@@ -1,16 +1,11 @@
 <script setup lang="ts">
 
 import WalletIcon from "../assets/icons/wallet.svg";
-import ScaleTransition from "../components/UI/ScaleTransition.vue";
-import {useCardStore} from "../store/useCardStore.ts";
-import {watch} from "vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 
-const cardState = useCardStore()
 const {push} = useRouter()
-const initApp = async () => {
-  await cardState.init()
+const initApp = () => {
   setTimeout(() => {
     push(RoutesPath.main)
   }, 500)

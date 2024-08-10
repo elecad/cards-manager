@@ -13,6 +13,9 @@ import {ISaleCard} from "../service/card.service.ts";
 
 const drawerStore = useDrawer()
 const cardStore = useCardStore()
+
+cardStore.getAll()
+
 const getIconPath = (icon: string) => `/src/assets/logo/${icon}`
 
 const clickHandler = (_: MouseEvent, selectedCard: ISaleCard) => {
