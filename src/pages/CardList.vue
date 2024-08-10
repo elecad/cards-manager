@@ -9,10 +9,16 @@ import {useDrawer} from "../store/useDrawer.ts";
 import TouchList from "../components/UI/TouchList.vue";
 import {useCardStore} from "../store/useCardStore.ts";
 import EmptyCardList from "../components/EmptyCardList.vue";
+import {ISaleCard} from "../service/card.service.ts";
 
 const drawerStore = useDrawer()
 const cardStore = useCardStore()
 const getIconPath = (icon: string) => `/src/assets/logo/${icon}`
+
+const clickHandler = (_: MouseEvent, selectedCard: ISaleCard) => {
+  cardStore.select(selectedCard)
+  drawerStore.openDrawer()
+}
 
 </script>
 
@@ -31,7 +37,7 @@ const getIconPath = (icon: string) => `/src/assets/logo/${icon}`
         <template v-else>
           <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20">
             <SaleCard v-for="card in cardStore.cards" :name="card.name" :iconPath="getIconPath(card.icon)"
-                      @click="drawerStore.openDrawer"/>
+                      @click="clickHandler($event, card)"/>
           </TouchList>
         </template>
 
