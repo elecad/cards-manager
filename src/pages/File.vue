@@ -49,12 +49,15 @@ const loadHandler = async (event: Event) => {
       }
       const code = codes[0]
       const base64 = await generate(code.rawValue, code.format)
-      cardState.saveCreateData({
-        barcode: base64,
-        type: code.format,
-        data: code.rawValue
+      push({
+        path: RoutesPath.create, state: {
+          prevData: {
+            barcode: base64,
+            type: code.format,
+            data: code.rawValue
+          }
+        }
       })
-      push(RoutesPath.create)
     } catch (e) {
       console.error(e)
       openAlert("Данный формат файлов не поддерживается")

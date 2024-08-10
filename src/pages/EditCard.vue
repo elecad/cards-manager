@@ -19,14 +19,11 @@ const {push} = useRouter()
 const editedCard = ref<ISaleCard>(PlaceholderCard)
 
 const routerState = history.state.prevDate as ISaleCard
-console.log(routerState)
-
 if (!routerState) {
   push(RoutesPath.error)
 } else {
   editedCard.value = routerState
 }
-
 </script>
 
 <template>
@@ -47,7 +44,7 @@ if (!routerState) {
 
       <div class="mb-3">
         <div class="text-sm font-medium mb-2">Название:</div>
-        <Input placeholder="Как будет называться карта?"/>
+        <Input v-model="editedCard.name" placeholder="Как будет называться карта?"/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">
           Осмысленное название позволяет найти иконку. Рекомендуется использовать название магазина
         </div>
@@ -55,7 +52,7 @@ if (!routerState) {
 
       <div class="mb-5">
         <div class="text-sm font-medium mb-2">Номер карты:</div>
-        <Input placeholder="Тут будет отображаться номер карты" readonly/>
+        <Input v-model="editedCard.data" placeholder="Тут будет отображаться номер карты" readonly/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Если вдруг номер
           отличается от того, что есть на Вашей карте, просканируйте карту снова!
         </div>

@@ -8,7 +8,6 @@ import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {useDrawer} from "../store/useDrawer.ts";
 import {useCardStore} from "../store/useCardStore.ts";
-import * as path from "node:path";
 
 
 const {push} = useRouter()
@@ -30,7 +29,7 @@ const goEditPage = () => {
   drawerStore.closeDrawer();
 
   setTimeout(() => {
-    push(RoutesPath.edit)
+    push({path: RoutesPath.edit, state: {prevDate: {...cardStore.selectedCard}}})
   }, 100)
 }
 
@@ -75,7 +74,6 @@ const goEditPage = () => {
 </template>
 
 <style scoped>
-/* Анимация закрытия при переходе на мобильную версию */
 @media (max-width: 400px) {
   .card-name {
     @apply text-xl

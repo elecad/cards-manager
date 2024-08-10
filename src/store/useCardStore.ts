@@ -35,7 +35,6 @@ export const useCardStore = defineStore('card', () => {
     const init = async () => {
         if (needInit.value) {
             cards.value = await getAllRecord()
-            console.log(cards)
             isLoading.value = false
             needInit.value = false
         }

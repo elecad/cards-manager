@@ -9,21 +9,26 @@ import Button from "../components/UI/Button.vue";
 import BackIcon from "../assets/icons/back.svg";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
-import {ISaleCardTransport} from "../service/card.service.ts";
+import {ISaleCard, ISaleCardTransport} from "../service/card.service.ts";
 import {computed, ref, watch} from "vue";
 import {notFoundIcon, saleCardIconList} from "../config/cardPatterns.ts";
 import {debounce} from "../helpers/Debounce.ts";
 import Alert from "../components/UI/Alert.vue";
 import {useAlert} from "../store/useAlert.ts";
-import {ICreateCard, useCardStore} from "../store/useCardStore.ts";
+import {ICreateCard, PlaceholderCard, PlaceholderCreatedData, useCardStore} from "../store/useCardStore.ts";
 
 
 const {push} = useRouter()
 const cardState = useCardStore()
-console.log(cardState.createdData.data)
+const cardData = ref<ISaleCardTransport>(PlaceholderCreatedData)
 
-if (!cardState.createdData.data) {
+const routerState = history.state.prevData as ISaleCardTransport
+
+console.log(history.state)
+if (!routerState) {
   push(RoutesPath.error)
+} else {
+  cardData.value = routerState
 }
 
 const {openAlert, closeAlert} = useAlert()
@@ -67,9 +72,9 @@ const createHandler = async () => {
       {
         name: name.value,
         description: description.value,
-        type: cardState.createdData.type,
-        barcode: cardState.createdData.barcode,
-        data: cardState.createdData.data,
+        type: cardData.value.type,
+        barcode: cardData.value.barcode,
+        data: cardData.value.data,
         icon: iconName.value
       }
   await cardState.add(newCard)
@@ -95,7 +100,7 @@ const createHandler = async () => {
 
       <div class="mb-5">
         <div class="text-sm font-medium mb-2">Номер карты:</div>
-        <Input v-model="cardState.createdData.data" placeholder="Тут будет отображаться номер карты" readonly/>
+        <Input v-model="cardData.data" placeholder="Тут будет отображаться номер карты" readonly/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Если вдруг номер
           отличается от того, что есть на Вашей карте, просканируйте карту снова!
         </div>
@@ -103,7 +108,7 @@ const createHandler = async () => {
 
       <div class="mb-5 flex items-center justify-center gap-3">
         <div class="rounded-2xl shadow-sm p-1 border-2">
-          <img :src="cardState.createdData.barcode" alt="Штрих-код"/>
+          <img :src="cardData.barcode" alt="Штрих-код"/>
         </div>
         <div class="rounded-2xl shadow-sm p-3 border-2">
           <img :src="iconPath" alt="Лого карты" class="rounded"/>
