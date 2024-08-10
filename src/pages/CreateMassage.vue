@@ -29,9 +29,7 @@ if (!routerState) {
   name.value = routerState.name
   iconName.value = routerState.icon
 }
-const iconPath = computed(() =>
-    routerState ?
-        `/src/assets/logo/${iconName.value}` : ""
+const iconPath = computed(() => `/src/assets/logo/${iconName.value}`
 )
 
 </script>

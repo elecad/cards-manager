@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import DrawerLayout from "../layouts/DrawerLayout.vue";
 import Navigation from "../components/Navigation.vue";
 import Search from "../components/Search.vue";
@@ -12,7 +12,7 @@ import EmptyCardList from "../components/EmptyCardList.vue";
 
 const drawerStore = useDrawer()
 const cardStore = useCardStore()
-
+const getIconPath = (icon: string) => `/src/assets/logo/${icon}`
 
 </script>
 
@@ -30,7 +30,8 @@ const cardStore = useCardStore()
         <EmptyCardList v-if="cardStore.cards.length === 0 && !cardStore.isLoading"/>
         <template v-else>
           <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20">
-            <SaleCard v-for="card in cardStore.cards" :name="card.name" @click="drawerStore.openDrawer"/>
+            <SaleCard v-for="card in cardStore.cards" :name="card.name" :iconPath="getIconPath(card.icon)"
+                      @click="drawerStore.openDrawer"/>
           </TouchList>
         </template>
 
