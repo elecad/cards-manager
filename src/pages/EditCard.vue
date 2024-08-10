@@ -3,7 +3,6 @@
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import Input from "../components/UI/Input.vue";
 import Textarea from "../components/UI/Textarea.vue";
-import AddCardIcon from "../assets/icons/add_card.svg";
 import Button from "../components/UI/Button.vue";
 import BackIcon from "../assets/icons/back.svg";
 import {useRouter} from "vue-router";
@@ -11,9 +10,22 @@ import {RoutesPath} from "../router/router.ts";
 import Navigation from "../components/Navigation.vue";
 import DeleteIcon from "../assets/icons/delete.svg";
 import SaveIcon from "../assets/icons/save.svg"
-
+import {ref} from "vue";
+import {ISaleCard} from "../service/card.service.ts";
+import {PlaceholderCard} from "../store/useCardStore.ts";
 
 const {push} = useRouter()
+
+const editedCard = ref<ISaleCard>(PlaceholderCard)
+
+const routerState = history.state.prevDate as ISaleCard
+console.log(routerState)
+
+if (!routerState) {
+  push(RoutesPath.error)
+} else {
+  editedCard.value = routerState
+}
 
 </script>
 

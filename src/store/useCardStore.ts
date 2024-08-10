@@ -1,12 +1,12 @@
 import {defineStore} from "pinia";
 import {ref} from "vue";
-import {cardService, ISaleCard} from "../service/card.service.ts";
+import {cardService, ISaleCard, ISaleCardTransport} from "../service/card.service.ts";
 import {notFoundIcon} from "../config/cardPatterns.ts";
 
 export type ICreateCard = Omit<ISaleCard, 'id' | 'position'>
 export type IUpdateCard = Omit<ISaleCard, 'id' | 'position'>
 
-const PlaceholderCard: ISaleCard = {
+export const PlaceholderCard: ISaleCard = {
     id: 0,
     data: "",
     position: -1,
@@ -17,10 +17,18 @@ const PlaceholderCard: ISaleCard = {
     description: ""
 }
 
+export const PlaceholderCreatedData: ISaleCardTransport = {
+    type: "",
+    data: "",
+    barcode: ""
+}
+
 export const useCardStore = defineStore('card', () => {
     const {getAllRecord, createRecord, nextRecordID, updateRecord, removeRecord} = cardService()
     const cards = ref<ISaleCard[]>([])
+
     const selectedCard = ref<ISaleCard>(PlaceholderCard)
+    const createdData = ref<ISaleCardTransport>(PlaceholderCreatedData)
     const isLoading = ref(true)
     const needInit = ref(true)
 
@@ -58,6 +66,10 @@ export const useCardStore = defineStore('card', () => {
         selectedCard.value = card
     }
 
+    const saveCreateData = (data: ISaleCardTransport) => {
+        createdData.value = data
+    }
 
-    return {cards, isLoading, add, get, update, remove, init, select, selectedCard}
+
+    return {cards, isLoading, add, get, update, remove, init, select, selectedCard, createdData, saveCreateData}
 })

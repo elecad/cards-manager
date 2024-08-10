@@ -8,6 +8,7 @@ import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {useDrawer} from "../store/useDrawer.ts";
 import {useCardStore} from "../store/useCardStore.ts";
+import * as path from "node:path";
 
 
 const {push} = useRouter()
@@ -27,6 +28,7 @@ const iconPath = computed(() => `/src/assets/logo/${cardStore.selectedCard.icon}
 
 const goEditPage = () => {
   drawerStore.closeDrawer();
+
   setTimeout(() => {
     push(RoutesPath.edit)
   }, 100)

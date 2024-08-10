@@ -19,23 +19,16 @@ import {ICreateCard, useCardStore} from "../store/useCardStore.ts";
 
 
 const {push} = useRouter()
-const data = ref("")
-const barcode = ref("")
+const cardState = useCardStore()
+console.log(cardState.createdData.data)
 
-const routerState = history.state.prevDate as ISaleCardTransport
-
-
-if (!routerState) {
+if (!cardState.createdData.data) {
   push(RoutesPath.error)
-} else {
-  data.value = routerState.data
-  barcode.value = routerState.barcode
 }
 
 const {openAlert, closeAlert} = useAlert()
 const name = ref("")
 const description = ref("")
-const cardState = useCardStore()
 const iconName = ref(notFoundIcon)
 const isValidMinLenght = computed(() => name.value.length > 0)
 const isValidMaxLenght = computed(() => name.value.length < 21)
@@ -74,9 +67,9 @@ const createHandler = async () => {
       {
         name: name.value,
         description: description.value,
-        type: routerState.type,
-        barcode: routerState.barcode,
-        data: routerState.data,
+        type: cardState.createdData.type,
+        barcode: cardState.createdData.barcode,
+        data: cardState.createdData.data,
         icon: iconName.value
       }
   await cardState.add(newCard)
@@ -102,7 +95,7 @@ const createHandler = async () => {
 
       <div class="mb-5">
         <div class="text-sm font-medium mb-2">Номер карты:</div>
-        <Input v-model="data" placeholder="Тут будет отображаться номер карты" readonly/>
+        <Input v-model="cardState.createdData.data" placeholder="Тут будет отображаться номер карты" readonly/>
         <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Если вдруг номер
           отличается от того, что есть на Вашей карте, просканируйте карту снова!
         </div>
@@ -110,7 +103,7 @@ const createHandler = async () => {
 
       <div class="mb-5 flex items-center justify-center gap-3">
         <div class="rounded-2xl shadow-sm p-1 border-2">
-          <img :src="barcode" alt="Штрих-код"/>
+          <img :src="cardState.createdData.barcode" alt="Штрих-код"/>
         </div>
         <div class="rounded-2xl shadow-sm p-3 border-2">
           <img :src="iconPath" alt="Лого карты" class="rounded"/>

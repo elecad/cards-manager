@@ -23,7 +23,7 @@ export interface ISaleCard {
     icon: string
 }
 
-export type ISaleCardTransport = Omit<ISaleCard, 'id' | 'name' | 'description' | 'position'>
+export type ISaleCardTransport = Omit<ISaleCard, 'id' | 'name' | 'description' | 'position' | 'icon'>
 
 
 export const cardService = () => {
