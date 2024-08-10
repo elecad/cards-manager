@@ -12,14 +12,16 @@ import {useCardStore} from "../store/useCardStore.ts";
 
 const {push} = useRouter()
 
-const description = "Код списания: 236"
 const isSecret = ref(true)
 
 const drawerStore = useDrawer()
 const cardStore = useCardStore()
 
+
 const message = computed(() =>
-    isSecret.value ? description.replace(/./g, "*") : description
+    isSecret.value
+        ? cardStore.selectedCard.description.replace(/./g, "*")
+        : cardStore.selectedCard.description
 )
 const iconPath = computed(() => `/src/assets/logo/${cardStore.selectedCard.icon}`)
 
@@ -62,7 +64,7 @@ const goEditPage = () => {
     <div class="mb-4">
       <div class="text-sm font-medium mb-2">Дополнительные данные о карте:</div>
       <Textarea placeholder="Дополнительные данные о карте не добалвены" readonly
-                v-model="cardStore.selectedCard.description" @click="() => {isSecret = !isSecret}"/>
+                v-model="message" @click="() => {isSecret = !isSecret}"/>
       <div class="text-xs font-medium text-slate-500 mb-1 text-center mt-1">Для того, чтобы посмотреть дополнительную
         информацию, нажмите на засекреченное поле ввода
       </div>
