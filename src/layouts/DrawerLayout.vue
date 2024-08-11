@@ -7,6 +7,7 @@ import FloatingButton from "../components/FloatingButton.vue";
 
 const uiStore = useDrawer()
 
+
 </script>
 
 <template>
