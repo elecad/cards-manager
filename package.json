@@ -25,6 +25,7 @@
     "@types/qrcode": "^1.5.5",
     "@types/sortablejs": "^1.15.8",
     "@types/uuid": "^10.0.0",
+    "@types/w3c-image-capture": "^1.0.10",
     "@vitejs/plugin-vue": "^5.0.5",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.40",

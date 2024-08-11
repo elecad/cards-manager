@@ -9,6 +9,7 @@ import X1Icon from "../assets/icons/1x.svg"
 import Button from "../components/UI/Button.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
+import {useBarcode} from "../hooks/useBarcode.ts";
 
 const videoElement = ref<HTMLVideoElement | null>()
 const stream = ref<MediaStream | null>()
@@ -17,6 +18,10 @@ const activeDevices = ref('')
 const isZoom = ref(false)
 const supportedZoom = ref(false)
 const {push} = useRouter()
+const {detect, generate} = useBarcode()
+const isRecognition = ref(false)
+const isCameraReady = ref(false)
+
 onMounted(async () => {
 
   if (!videoElement.value)
@@ -33,7 +38,6 @@ onMounted(async () => {
 
 
   const allDevice = await navigator.mediaDevices.enumerateDevices();
-  // devices.value = allDevice.filter((device) => device.kind == "videoinput" && device.label.includes("back"));
   devices.value = allDevice.filter((device) => device.kind == "videoinput");
 
   const videoTrack = stream.value.getVideoTracks()[0]
@@ -45,10 +49,9 @@ onMounted(async () => {
   if (!meta.deviceId) return
   activeDevices.value = meta.deviceId
 
-  console.log(activeDevices.value)
-  console.log(stream.value)
   videoElement.value.srcObject = stream.value;
   videoElement.value.play()
+  isCameraReady.value = true
 })
 
 const setDevice = async (_: MouseEvent, device: MediaDeviceInfo) => {
@@ -63,6 +66,7 @@ const setDevice = async (_: MouseEvent, device: MediaDeviceInfo) => {
   activeDevices.value = device.deviceId
   videoElement.value.srcObject = stream.value;
   videoElement.value.play()
+
 }
 
 const zoomChange = async () => {
@@ -72,6 +76,51 @@ const zoomChange = async () => {
   if (videoTrack)
     await videoTrack.applyConstraints({advanced: [{zoom}]});
   isZoom.value = !isZoom.value
+}
+
+const recognitionHandler = async () => {
+  console.log("Начало")
+  isRecognition.value = true
+  if (!stream.value)
+    return
+  if (!videoElement.value)
+    return
+
+
+  const videoTracks = stream.value.getVideoTracks()
+  videoElement.value.pause()
+
+  const imageCapture = new ImageCapture(videoTracks[0])
+  const blob = await imageCapture.takePhoto()
+
+
+  try {
+    const codes = await detect(blob)
+    if (!codes.length) {
+      // openAlert("Штрих-код не найден")
+      await videoElement.value?.play()
+      return
+    }
+    videoTracks.forEach((track) => {
+      track.stop();
+    });
+    const code = codes[0]
+    const base64 = await generate(code.rawValue, code.format)
+    push({
+      path: RoutesPath.create, state: {
+        prevData: {
+          barcode: base64,
+          type: code.format,
+          data: code.rawValue
+        }
+      }
+    })
+  } catch (e) {
+    console.error(e)
+    // openAlert("Данный формат файлов не поддерживается")
+  } finally {
+    isRecognition.value = false
+  }
 }
 </script>
 
@@ -83,20 +132,23 @@ const zoomChange = async () => {
           <CameraIcon class="w-20 h-20 fill-gray-400"/>
           <div class="text-md text-gray-500 font-bold">Запуск камеры...</div>
         </div>
-        <video class="w-full h-full object-cover z-20" autoplay muted playsinline ref="videoElement"></video>
+        <video class="w-full h-full object-cover z-20 transition-opacity" autoplay muted playsinline ref="videoElement"
+               :class="{'opacity-0': !isCameraReady}"></video>
       </div>
 
       <div class="control-panel flex-1 bg-black w-full text-white flex items-center justify-center flex-col gap-5 py-5">
         <div class="flex items-center justify-evenly w-full">
-          <Button only-icon bg-color="bg-slate-600" @click="() => push(RoutesPath.create)">
+          <Button only-icon bg-color="bg-slate-600" @click="() => push(RoutesPath.select)">
             <template v-slot:icon-left>
               <BackIcon class="fill-slate-300 w-4 h-4"/>
             </template>
 
           </Button>
-          <Button class="w-20 h-20 !rounded-full border-4 border-slate-300" bg-color="bg-slate-600">
+          <Button class="w-20 h-20 !rounded-full border-4 border-slate-300" bg-color="bg-slate-600"
+                  @click="recognitionHandler">
             <template v-slot:icon-left>
-              <ImageSearchIcon class="fill-slate-300 w-8 h-8"/>
+              <span class="loader" v-if="isRecognition"></span>
+              <ImageSearchIcon v-else class="fill-slate-300 w-8 h-8"/>
             </template>
           </Button>
 
@@ -104,12 +156,10 @@ const zoomChange = async () => {
             <template v-slot:icon-left>
               <X1Icon v-if="isZoom" class="fill-slate-300"/>
               <X2Icon v-else class="fill-slate-300"/>
-
-
             </template>
           </Button>
         </div>
-        <div class="flex items-center justify-center gap-5 overflow-y-auto w-full">
+        <div class="flex items-center justify-center gap-5 overflow-y-auto w-full min-h-[40px]">
           <Button v-for="(device, i) in devices"
                   @click="setDevice($event, device)"
                   class="text-md px-3 py-2 !rounded-full border-2 border-slate-600"
@@ -128,5 +178,76 @@ const zoomChange = async () => {
 .camera-preview {
   flex: 6;
 }
+
+.loader {
+  animation: rotate 1s infinite;
+  height: 50px;
+  width: 50px;
+}
+
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+
+.loader:before {
+  animation: ball1 1s infinite;
+  background-color: #a6afbc;
+  box-shadow: 30px 0 0 #a6afbc;
+  margin-bottom: 10px;
+}
+
+.loader:after {
+  animation: ball2 1s infinite;
+  background-color: #a6afbc;
+  box-shadow: 30px 0 0 #a6afbc;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(0.4)
+  }
+  50% {
+    transform: rotate(360deg) scale(0.6)
+  }
+  100% {
+    transform: rotate(720deg) scale(0.5)
+  }
+}
+
+@keyframes ball1 {
+  0% {
+    box-shadow: 30px 0 0 #a6afbc;
+  }
+  50% {
+    box-shadow: 0 0 0 #a6afbc;
+    margin-bottom: 0;
+    transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #a6afbc;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes ball2 {
+  0% {
+    box-shadow: 30px 0 0 #a6afbc;
+  }
+  50% {
+    box-shadow: 0 0 0 #a6afbc;
+    margin-top: -20px;
+    transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #a6afbc;
+    margin-top: 0;
+  }
+}
+
 
 </style>
