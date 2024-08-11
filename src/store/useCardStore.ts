@@ -47,6 +47,10 @@ export const useCardStore = defineStore('card', () => {
         return cards.value.find((el) => el.id === id)
     }
 
+    const getByPosition = (position: number) => {
+        return cards.value.find((el) => el.position === position)
+    }
+
     const update = (newCard: ISaleCard) => {
         return updateRecord(newCard.id, newCard)
     }
@@ -64,5 +68,18 @@ export const useCardStore = defineStore('card', () => {
     }
 
 
-    return {cards, isLoading, add, get, update, remove, select, selectedCard, createdData, saveCreateData, getAll}
+    return {
+        cards,
+        isLoading,
+        add,
+        get,
+        update,
+        remove,
+        select,
+        selectedCard,
+        createdData,
+        saveCreateData,
+        getAll,
+        getByPosition
+    }
 })

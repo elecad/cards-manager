@@ -16,6 +16,7 @@ import SearchNotFound from "../components/SearchNotFound.vue";
 import {RoutesPath} from "../router/router.ts";
 import SearchOffIcon from "../assets/icons/search_off.svg"
 import Button from "../components/UI/Button.vue";
+import {SortableEvent} from "sortablejs";
 
 const drawerStore = useDrawer()
 const cardStore = useCardStore()
@@ -53,6 +54,30 @@ const endSearch = () => {
   query.value = ""
 }
 const searchCards = computed(() => cardStore.cards.filter((c) => c.name.toLowerCase().includes(query.value.toLowerCase())))
+
+const touchSort = async (event: SortableEvent) => {
+  const newIndex = event.newIndex
+  const oldIndex = event.oldIndex
+  console.log(newIndex, oldIndex)
+  if (newIndex == undefined)
+    return
+  if (oldIndex == undefined)
+    return
+
+  const newPosition = newIndex + 1
+  const oldPosition = oldIndex + 1
+
+  const touchCard = cardStore.getByPosition(oldPosition)
+  const editCard = cardStore.getByPosition(newPosition)
+
+  if (!touchCard)
+    return
+  if (!editCard)
+    return
+
+  await cardStore.update({...editCard, position: oldPosition})
+  await cardStore.update({...touchCard, position: newPosition})
+}
 </script>
 
 <template>
@@ -91,7 +116,7 @@ const searchCards = computed(() => cardStore.cards.filter((c) => c.name.toLowerC
             <h3 class="font-bold mt-6 mb-5">Мои карты</h3>
             <EmptyCardList v-if="cardStore.cards.length === 0 && !cardStore.isLoading"/>
             <template v-else>
-              <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20">
+              <TouchList class="sale-card-wrapper grid grid-cols-2 gap-1.5 mb-20" @endTouch="touchSort">
                 <SaleCard v-for="card in cardStore.cards" :name="card.name" :iconPath="getIconPath(card.icon)"
                           @click="clickHandler($event, card)"/>
               </TouchList>

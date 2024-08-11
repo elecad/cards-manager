@@ -39,7 +39,7 @@ export const cardService = () => {
     })
 
     const getAllRecord = async () => {
-        return $.DATABASE_NAME.toArray()
+        return $.DATABASE_NAME.orderBy("position").toArray()
     }
 
     const getRecord = async (id: number) => {

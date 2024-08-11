@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import Sortable from 'sortablejs';
+import Sortable from "sortablejs";
+
 
 const rootElement = ref<HTMLDivElement | null>(null)
+
+const emit = defineEmits<{
+  (e: 'endTouch', event: Sortable.SortableEvent): void
+}>()
 
 onMounted(() => {
   if (!rootElement.value)
@@ -11,11 +16,8 @@ onMounted(() => {
     animation: 200,
     delay: 300,
     onSort(event) {
-      console.log(event)
+      emit('endTouch', event)
     },
-    // onEnd: (event) => {
-    //   console.log(event)
-    // }
 
   });
 })
