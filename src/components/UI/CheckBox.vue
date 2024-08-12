@@ -1,10 +1,16 @@
 <script setup lang="ts">
+interface CheckBoxProps {
+  disabled?: boolean
+}
 
+const model = defineModel()
+
+const {disabled} = defineProps<CheckBoxProps>()
 </script>
 
 <template>
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" v-model="model" :disabled>
     <span class="slider"></span>
   </label>
 </template>

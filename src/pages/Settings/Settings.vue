@@ -18,6 +18,8 @@ import BigButton from "../../components/UI/BigButtonWithTemplate.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../../router/router.ts";
 import LargeButton from "../../components/UI/LargeButton.vue";
+import Button from "../../components/UI/Button.vue";
+import AddIcon from "../../assets/icons/add_card.svg";
 
 const {push} = useRouter()
 </script>
@@ -28,34 +30,37 @@ const {push} = useRouter()
     <div class="content px-3 pt-4">
       <div class="font-bold text-inherit text-xl mb-6 pl-3">Настройки приложения</div>
 
-      <div class="setting-item flex items-center justify-between mb-4 px-2 py-3">
+      <div class="setting-item flex items-center justify-between mb-4 px-2 py-3 opacity-50">
         <div class="flex-1 mr-2">
           <div class="text-md font-medium">Тёмная тема</div>
           <div class="text-xs font-medium text-slate-500">
             Изменяет внешний вид приложения
           </div>
         </div>
-        <CheckBox/>
+        <!--        <CheckBox disabled/>-->
+        <div class="text-sm px-2 py-1 bg-blue-500 rounded text-white">В разработке</div>
       </div>
 
-      <div class="setting-item flex items-center justify-between mb-4 px-2 py-3">
+      <div class="setting-item flex items-center justify-between mb-4 px-2 py-3 opacity-50">
         <div class="flex-1 mr-2">
           <div class="text-md font-medium">Уменьшить карты</div>
           <div class="text-xs font-medium text-slate-500">
             Карты становятся больше, удобно при большой диагонале устройства
           </div>
         </div>
-        <CheckBox/>
+        <!--        <CheckBox/>-->
+        <div class="text-sm px-2 py-1 bg-blue-500 rounded text-white">В разработке</div>
       </div>
 
-      <div class="setting-item flex items-center justify-between mb-4 px-2 py-3">
+      <div class="setting-item flex items-center justify-between mb-4 px-2 py-3 opacity-50">
         <div class="flex-1 mr-2">
           <div class="text-md font-medium">Увеличить карты</div>
           <div class="text-xs font-medium text-slate-500">
             Карты становятся больше, удобно при маленькой диагонале устройства
           </div>
         </div>
-        <CheckBox/>
+        <!--        <CheckBox/>-->
+        <div class="text-sm px-2 py-1 bg-blue-500 rounded text-white">В разработке</div>
       </div>
 
       <div class="grid grid-cols-2 gap-3 mb-4">
@@ -70,12 +75,13 @@ const {push} = useRouter()
         </LargeButton>
 
         <LargeButton @click="() => {push(RoutesPath.share)}">
-          <div class="flex items-center justify-center flex-col gap-2 text-center">
+          <div class="flex items-center justify-center flex-col gap-2 text-center opacity-50">
             <ShareIcon class="w-8 h-8 fill-slate-400"/>
             <div class="text-md font-medium">Поделиться картами</div>
             <div class="text-xs font-medium text-slate-400">
               Быстрый перенос данных на другое устройство
             </div>
+            <div class="text-sm px-2 py-1 bg-blue-500 rounded text-white">В разработке</div>
           </div>
         </LargeButton>
       </div>
@@ -93,20 +99,31 @@ const {push} = useRouter()
 
       </LargeButton>
 
-      <hr class="mb-4"/>
+      <hr class="mb-6"/>
 
-      <LargeButton @click="() => {push(RoutesPath.main)}">
-        <div class="flex items-center justify-between">
-          <div class="flex-1 mr-2">
-            <div class="text-md font-medium">Вернуться на главный экран</div>
-            <div class="text-xs font-medium text-slate-400">
-              Закончили настройку?
-            </div>
-          </div>
-          <HomeIcon class="w-8 h-8 fill-slate-400"/>
-        </div>
 
-      </LargeButton>
+      <div class="flex items-center justify-center flex-col">
+        <div class="text-sm font-medium text-slate-400 mb-4">Закончили настройку?</div>
+        <Button bg-color="bg-gray-500" text-color="text-white" @click="() => push(RoutesPath.main)">
+          <template v-slot:icon-right>
+            <HomeIcon class="fill-white w-5 h-5"/>
+          </template>
+          На главный экран
+        </Button>
+      </div>
+
+      <!--      <LargeButton @click="() => {push(RoutesPath.main)}">-->
+      <!--        <div class="flex items-center justify-between">-->
+      <!--          <div class="flex-1 mr-2">-->
+      <!--            <div class="text-md font-medium">Вернуться на главный экран</div>-->
+      <!--            <div class="text-xs font-medium text-slate-400">-->
+      <!--              Закончили настройку?-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--          <HomeIcon class="w-8 h-8 fill-slate-400"/>-->
+      <!--        </div>-->
+
+      <!--      </LargeButton>-->
 
 
     </div>
