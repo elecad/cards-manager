@@ -6,11 +6,14 @@ interface CheckBoxProps {
 const model = defineModel()
 
 const {disabled} = defineProps<CheckBoxProps>()
+const emit = defineEmits<{
+  (e: 'change'): void
+}>()
 </script>
 
 <template>
   <label class="switch">
-    <input type="checkbox" v-model="model" :disabled>
+    <input type="checkbox" v-model="model" :disabled @change="emit('change')">
     <span class="slider"></span>
   </label>
 </template>

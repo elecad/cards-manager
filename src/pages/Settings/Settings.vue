@@ -9,19 +9,17 @@
 
 import DefaultLayout from "../../layouts/DefaultLayout.vue";
 import Navigation from "../../components/Navigation.vue";
-import CheckBox from "../../components/UI/CheckBox.vue";
 import OfflineIcon from "../../assets/icons/offline.svg";
 import InfoIcon from "../../assets/icons/info.svg"
 import HomeIcon from "../../assets/icons/home.svg"
 import ShareIcon from "../../assets/icons/share.svg"
-import BigButton from "../../components/UI/BigButtonWithTemplate.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../../router/router.ts";
 import LargeButton from "../../components/UI/LargeButton.vue";
 import Button from "../../components/UI/Button.vue";
-import AddIcon from "../../assets/icons/add_card.svg";
 
 const {push} = useRouter()
+
 </script>
 
 <template>
@@ -104,11 +102,11 @@ const {push} = useRouter()
 
       <div class="flex items-center justify-center flex-col">
         <div class="text-sm font-medium text-slate-400 mb-4">Закончили настройку?</div>
-        <Button bg-color="bg-gray-500" text-color="text-white" @click="() => push(RoutesPath.main)">
+        <Button bg-color="bg-slate-500" text-color="text-white" @click="() => push(RoutesPath.main)">
           <template v-slot:icon-right>
             <HomeIcon class="fill-white w-5 h-5"/>
           </template>
-          На главный экран
+          Главный экран
         </Button>
       </div>
 

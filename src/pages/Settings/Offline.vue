@@ -6,6 +6,24 @@ import CheckBox from "../../components/UI/CheckBox.vue";
 import Button from "../../components/UI/Button.vue";
 import CheckIcon from "../../assets/icons/check.svg";
 import BackIcon from "../../assets/icons/back.svg";
+
+import {useOfflineMode} from "../../hooks/useOfflineMode.ts";
+
+const {disable, isOffline, enable} = useOfflineMode()
+
+
+const changeHandler = async () => {
+  if (isOffline.value)
+    await enable()
+  else
+    await disable()
+}
+
+const checkHandler = async () => {
+  const CACHE_MAP = "/src/assets/Barcode.png"
+  const response = await fetch(CACHE_MAP)
+  console.log("[C]", response)
+}
 </script>
 
 <template>
@@ -20,7 +38,7 @@ import BackIcon from "../../assets/icons/back.svg";
             Доступ к картам можно получить без Интернета
           </div>
         </div>
-        <CheckBox/>
+        <CheckBox v-model="isOffline" @change="changeHandler"/>
       </div>
 
 
@@ -33,7 +51,7 @@ import BackIcon from "../../assets/icons/back.svg";
           </template>
           Назад
         </Button>
-        <Button bg-color="bg-blue-600" text-color="text-white flex-1">
+        <Button bg-color="bg-blue-600" text-color="text-white flex-1" @click="checkHandler">
           <template v-slot:icon-right>
             <CheckIcon class="fill-white w-6 h-6"/>
           </template>
