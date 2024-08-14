@@ -47,7 +47,7 @@ watch(isValidMaxLenght, (newValue) => {
 
 })
 
-const iconPath = computed(() => `/src/assets/logo/${iconName.value}`)
+const iconPath = computed(() => `/public/logo/${iconName.value}`)
 
 const inputHandler = debounce(() => {
   const findIcon = saleCardIconList.find((el) => {

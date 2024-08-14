@@ -31,7 +31,7 @@ if (!routerState) {
   editedCard.value = routerState
 }
 
-const iconPath = computed(() => `/src/assets/logo/${editedCard.value.icon}`)
+const iconPath = computed(() => `/public/logo/${editedCard.value.icon}`)
 const isValidMinLenght = computed(() => editedCard.value.name.length > 0)
 const isValidMaxLenght = computed(() => editedCard.value.name.length < 21)
 

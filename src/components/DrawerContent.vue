@@ -23,7 +23,7 @@ const message = computed(() =>
         ? cardStore.selectedCard.description.replace(/./g, "*")
         : cardStore.selectedCard.description
 )
-const iconPath = computed(() => `/src/assets/logo/${cardStore.selectedCard.icon}`)
+const iconPath = computed(() => `/public/logo/${cardStore.selectedCard.icon}`)
 
 const goEditPage = () => {
   drawerStore.closeDrawer();

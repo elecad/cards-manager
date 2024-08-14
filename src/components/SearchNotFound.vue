@@ -18,9 +18,9 @@ const emit = defineEmits<{
         <div class="text-xl mb-1">Ничего не найдено</div>
         <div class="text-sm">Может стоит изменить запрос?</div>
       </div>
-      <Button bg-color="bg-gray-100" text-color="text-gray-600" @click="() => {$emit('endSearch')}">
+      <Button bg-color="bg-slate-500" text-color="text-gray-100" @click="() => {$emit('endSearch')}">
         <template v-slot:icon-left>
-          <SearchOffIcon class="fill-gray-600 w-6 h-6"/>
+          <SearchOffIcon class="fill-gray-100 w-6 h-6"/>
         </template>
         Закончить поиск
       </Button>
