@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import CardOffIcon from "../assets/icons/card_off.svg"
-import Button from "./UI/Button.vue";
-import {RoutesPath} from "../router/router.ts";
-import AddIcon from "../assets/icons/add_card.svg";
 import WalletIcon from "../assets/icons/wallet.svg";
-import {useRouter} from "vue-router";
 
-const {push} = useRouter()
 </script>
 
 

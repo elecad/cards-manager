@@ -1,22 +1,30 @@
-const CACHE_KEY = "pwa-cache"
 const MESSAGES = {
-    cache: "cache-start",
-    clear: "clear",
-    resources: "resources"
+    done: "cache-done",
+    check: "cache-check",
+    resource: "cache-resource",
 }
-const CACHE_MAP = ["/src/assets/Barcode.png"]
 
+const CACHE_KEY = "pwa-cache"
+const CHANEL_KEY = "sw-chanel"
+
+const CACHE_MAP = ["/src/assets/Barcode.png"]
+const chanel = new BroadcastChannel(CHANEL_KEY)
 
 self.addEventListener('install', async (event) => {
     console.log('[W] Установка завершена успешно');
-
-
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', async (event) => {
     console.log('[W] SW Активирован');
+    for (const url of CACHE_MAP) {
+        await cached(url)
+        chanel.postMessage({type: MESSAGES.resource, url});
+    }
+    console.log('[W] Конец кэширования')
+    await self.clients.claim()
 
 });
+
 
 const cached = async (url) => {
     const cache = await caches.open(CACHE_KEY)
@@ -32,7 +40,6 @@ const fetchHandler = async (event) => {
     const cache = await caches.open(CACHE_KEY)
     const cachedResponse = await cache.match(event.request.url)
     if (cachedResponse) {
-        await cached(event.request.url)
         return cachedResponse
     } else {
         return await fetch(event.request.url);
@@ -40,23 +47,23 @@ const fetchHandler = async (event) => {
 }
 
 self.addEventListener('fetch', async (event) => {
-    console.log("[W]", event.request)
+    console.log('[W] Fetch', event.request.url);
     event.respondWith(fetchHandler(event))
-
 })
 
-self.addEventListener('message', async (event) => {
-    console.log(self.clients)
+
+chanel.addEventListener('message', async (event) => {
     const type = event.data
-    console.log('[W]', type)
-    for (const url of CACHE_MAP) {
-        await cached(url)
+    if (type === MESSAGES.check) {
+        console.log("[W] Проверка")
+        for (const url of CACHE_MAP) {
+            chanel.postMessage({type: MESSAGES.resource, url});
+        }
     }
-    // From service-worker.js:
-    const channel = new BroadcastChannel('sw-messages');
-    channel.postMessage({title: 'Hello from SW'});
-    console.log('[W] Конец кэширования')
 })
+
+
+
 
 
 

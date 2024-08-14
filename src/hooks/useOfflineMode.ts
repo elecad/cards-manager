@@ -1,15 +1,29 @@
 import {ref} from "vue";
 
-const LS_KEY = "offline-mode"
 
-export const MESSAGES = {
-    cache: "cache-start",
-    clear: "clear",
-    resources: "resources"
+const LS_KEY = "offline-mode"
+const CHANEL_KEY = "sw-chanel"
+
+const MESSAGES = {
+    done: "cache-done",
+    check: "cache-check",
+    resource: "cache-resource",
 }
 
+
 export const useOfflineMode = () => {
-    const worker = ref<ServiceWorker | null>()
+    const chanel = new BroadcastChannel(CHANEL_KEY)
+    const cacheList = ref<Response[]>([])
+
+    chanel.addEventListener("message", async (event) => {
+        const type = event.data.type
+        console.log("[C]", type)
+        if (type === MESSAGES.resource) {
+            const url = event.data.url
+            const response = await fetch(url)
+            cacheList.value.push(response)
+        }
+    })
 
     const initValue = () => {
         const stringValue = localStorage.getItem(LS_KEY) ?? "null"
@@ -21,54 +35,33 @@ export const useOfflineMode = () => {
         }
     }
 
-
     const isOffline = ref(initValue())
 
 
     const enable = async () => {
-        // const worker = new Worker('/sw.js')
-        // worker.addEventListener('message', (event) => {
-        //     console.log(event)
-        // })
-
-
         await navigator.serviceWorker.register('/sw.js')
-
-        const ready = await navigator.serviceWorker.ready
-
-        worker.value = ready.active
+        await navigator.serviceWorker.ready
         localStorage.setItem(LS_KEY, JSON.stringify(true))
-
-        worker.value?.postMessage(MESSAGES.cache)
-
-        const channel = new BroadcastChannel('sw-messages');
-        channel.addEventListener('message', event => {
-            console.log('Received', event.data);
-        });
-
+        location.reload()
     }
 
     const disable = async () => {
-
         console.log("[С] Удаление воркера")
         const services = await navigator.serviceWorker.getRegistrations()
-        const activeWorker = services[0]
-        await activeWorker.unregister()
+        for (const worker of services) {
+            await worker.unregister()
+        }
         localStorage.setItem(LS_KEY, JSON.stringify(false))
+        location.reload()
+    }
+
+    const checkCache = () => {
+        cacheList.value = []
+        chanel.postMessage(MESSAGES.check)
     }
 
 
-    // const getCurrentWorker = async () => {
-    //     const [service] = await navigator.serviceWorker.getRegistrations()
-    //     if (service.active)
-    //         return service.active
-    //     if (service.installing)
-    //         return service.installing
-    //
-    // }
-
-
-    return {enable, disable, isOffline}
+    return {enable, disable, isOffline, cacheList, checkCache}
 
 
 }
