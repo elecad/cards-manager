@@ -12,7 +12,7 @@ import DeleteIcon from "../assets/icons/delete.svg";
 import SaveIcon from "../assets/icons/save.svg"
 import {computed, ref, watch} from "vue";
 import {ISaleCard} from "../service/card.service.ts";
-import {ICreateCard, PlaceholderCard, useCardStore} from "../store/useCardStore.ts";
+import {PlaceholderCard, useCardStore} from "../store/useCardStore.ts";
 import {debounce} from "../helpers/Debounce.ts";
 import {notFoundIcon, saleCardIconList} from "../config/cardPatterns.ts";
 import {useAlert} from "../store/useAlert.ts";

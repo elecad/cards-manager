@@ -13,7 +13,6 @@ import {ISaleCard} from "../service/card.service.ts";
 import {debounce} from "../helpers/Debounce.ts";
 import SearchLogo from "../components/SearchLogo.vue";
 import SearchNotFound from "../components/SearchNotFound.vue";
-import {RoutesPath} from "../router/router.ts";
 import SearchOffIcon from "../assets/icons/search_off.svg"
 import Button from "../components/UI/Button.vue";
 import {SortableEvent} from "sortablejs";

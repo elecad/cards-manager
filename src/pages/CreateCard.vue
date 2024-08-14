@@ -9,13 +9,13 @@ import Button from "../components/UI/Button.vue";
 import BackIcon from "../assets/icons/back.svg";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
-import {ISaleCard, ISaleCardTransport} from "../service/card.service.ts";
+import {ISaleCardTransport} from "../service/card.service.ts";
 import {computed, ref, watch} from "vue";
 import {notFoundIcon, saleCardIconList} from "../config/cardPatterns.ts";
 import {debounce} from "../helpers/Debounce.ts";
 import Alert from "../components/UI/Alert.vue";
 import {useAlert} from "../store/useAlert.ts";
-import {ICreateCard, PlaceholderCard, PlaceholderCreatedData, useCardStore} from "../store/useCardStore.ts";
+import {ICreateCard, PlaceholderCreatedData, useCardStore} from "../store/useCardStore.ts";
 
 
 const {push} = useRouter()

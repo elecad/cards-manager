@@ -4,7 +4,6 @@ import Navigation from "../../components/Navigation.vue";
 import DefaultLayout from "../../layouts/DefaultLayout.vue";
 import WalletIcon from "../../assets/icons/wallet.svg";
 import Button from "../../components/UI/Button.vue";
-import CheckIcon from "../../assets/icons/check.svg";
 import CodeIcon from "../../assets/icons/code.svg";
 import VkIcon from "../../assets/icons/vk-2.svg";
 import TelegramIcon from "../../assets/icons/telegram.svg";

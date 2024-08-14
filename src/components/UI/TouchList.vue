@@ -12,7 +12,8 @@ const emit = defineEmits<{
 onMounted(() => {
   if (!rootElement.value)
     return
-  const sortable = new Sortable(rootElement.value, {
+
+  new Sortable(rootElement.value, {
     animation: 200,
     delay: 300,
     onSort(event) {

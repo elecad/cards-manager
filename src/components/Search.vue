@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import SearchIcon from "../assets/icons/search.svg";
-import Input from "./UI/Input.vue";
 
 const model = defineModel()
 const emit = defineEmits<{

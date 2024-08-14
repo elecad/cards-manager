@@ -13,7 +13,6 @@ import {useFile} from "../hooks/useFile.ts";
 import {useBarcode} from "../hooks/useBarcode.ts";
 import {useAlert} from "../store/useAlert.ts";
 import {RoutesPath} from "../router/router.ts";
-import {useCardStore} from "../store/useCardStore.ts";
 
 const {back} = useRouter()
 const {fileToBlob} = useFile()
@@ -21,7 +20,6 @@ const {detect, generate} = useBarcode()
 const fileElement = ref<HTMLInputElement | null>(null)
 const {push} = useRouter()
 const {openAlert} = useAlert()
-const cardState = useCardStore()
 
 const supportedFormats = [
   "image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"

@@ -2,28 +2,12 @@
 
 import Navigation from "../../components/Navigation.vue";
 import DefaultLayout from "../../layouts/DefaultLayout.vue";
-import CheckBox from "../../components/UI/CheckBox.vue";
 import Button from "../../components/UI/Button.vue";
 import CheckIcon from "../../assets/icons/check.svg";
 import BackIcon from "../../assets/icons/back.svg";
-import Dexie, {EntityTable} from 'dexie';
-import {onMounted, watch} from "vue";
+import {onMounted} from "vue";
 
-import {cardService} from "../../service/card.service.ts";
 import {useCardStore} from "../../store/useCardStore.ts";
-
-interface ISaleCard {
-  id: string
-  name: string
-  description: string
-  barcode: string
-  sharedData: {
-    type: string
-    data: string
-  }
-}
-
-const {getAll, create, update, remove, get} = cardService()
 
 
 // const db = new Dexie('myDatabase') as Dexie & {
@@ -75,7 +59,6 @@ const store = useCardStore()
 
 
 const action = async () => {
-  store.add({name: "Тестовая карта", barcode: "123", description: "Тест", sharedData: {data: "123", type: "123"}})
   // console.log(store.get(5))
 }
 
