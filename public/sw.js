@@ -4,7 +4,7 @@ const MESSAGES = {
     resource: "cache-resource",
 }
 
-const CACHE_KEY = "pwa-cache"
+const CACHE_KEY = "pwa-cache-2"
 const CHANEL_KEY = "sw-chanel"
 
 const CACHE_MAP = []
