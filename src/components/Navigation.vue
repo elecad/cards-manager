@@ -15,7 +15,7 @@ const {push} = useRouter();
   <div class="navigation-bar flex px-6 justify-between items-center">
     <div class="flex transition gap-1 active:scale-95  active::opacity-80" @click="push(RoutesPath.main)">
       <WalletIcon width="22px" height="22px" class="fill-black"/>
-      <p class="font-bold text-inherit">Картница</p>
+      <p class="font-bold text-inherit">Картница <sup>βeta</sup></p>
     </div>
 
     <div class="buttons-wrapper flex gap-4">

@@ -10,6 +10,10 @@ import TelegramIcon from "../../assets/icons/telegram.svg";
 import GitHub from "../../assets/icons/github.svg";
 import BackIcon from "../../assets/icons/back.svg";
 import ScaleTransition from "../../components/UI/ScaleTransition.vue";
+import {useRouter} from "vue-router";
+import {RoutesPath} from "../../router/router.ts";
+
+const {push} = useRouter()
 </script>
 
 <template>
@@ -26,7 +30,7 @@ import ScaleTransition from "../../components/UI/ScaleTransition.vue";
           </div>
         </ScaleTransition>
 
-        <div class="font-bold text-gray-700">Картница v1.0</div>
+        <div class="font-bold text-gray-700">Картница v0.5 <sup>βeta</sup></div>
         <div class="text-gray-500">Просто, быстро, без интернета</div>
         <div class="text-gray-500 text-sm">by Anton Dakhin 2024</div>
 
@@ -41,12 +45,14 @@ import ScaleTransition from "../../components/UI/ScaleTransition.vue";
       </div>
 
       <div class="flex items-center justify-evenly gap-3 flex-wrap mb-4">
-        <Button bg-color="bg-gray-600" text-color="text-white">
-          <template v-slot:icon-right>
-            <CodeIcon class="fill-white w-5 h-5"/>
-          </template>
-          Исходный код проекта
-        </Button>
+        <a href="https://github.com/elecad/cards-manager">
+          <Button bg-color="bg-gray-600" text-color="text-white">
+            <template v-slot:icon-right>
+              <CodeIcon class="fill-white w-5 h-5"/>
+            </template>
+            Исходный код проекта
+          </Button>
+        </a>
       </div>
 
 
@@ -57,63 +63,39 @@ import ScaleTransition from "../../components/UI/ScaleTransition.vue";
       </div>
 
 
-      <!--      <div class="flex items-center justify-evenly gap-6 flex-wrap">-->
-      <!--        <Button class="flex-2">-->
-      <!--          <template v-slot:icon-left>-->
-      <!--            <BackIcon class="fill-gray-500 w-4 h-4"/>-->
-      <!--          </template>-->
-      <!--          Назад-->
-      <!--        </Button>-->
-      <!--        <Button bg-color="bg-blue-600" text-color="text-white">-->
-      <!--          <template v-slot:icon-right>-->
-      <!--            <CheckIcon class="fill-white w-6 h-6"/>-->
-      <!--          </template>-->
-      <!--          GitHub-->
-      <!--        </Button>-->
-
-      <!--        <Button bg-color="bg-blue-600" text-color="text-white">-->
-      <!--          <template v-slot:icon-right>-->
-      <!--            <CheckIcon class="fill-white w-6 h-6"/>-->
-      <!--          </template>-->
-      <!--          VK-->
-      <!--        </Button>-->
-
-      <!--        <Button bg-color="bg-blue-600" text-color="text-white">-->
-      <!--          <template v-slot:icon-right>-->
-      <!--            <CheckIcon class="fill-white w-6 h-6"/>-->
-      <!--          </template>-->
-      <!--          VK-->
-      <!--        </Button>-->
-      <!--      </div>-->
-
-
       <div class="flex items-center justify-evenly gap-3 flex-wrap mb-4">
-        <Button bg-color="bg-gray-600" text-color="text-white">
-          <template v-slot:icon-right>
-            <GitHub class="fill-white w-6 h-6"/>
-          </template>
-          GitHub
-        </Button>
+        <a href="https://github.com/elecad">
+          <Button bg-color="bg-gray-600" text-color="text-white">
+            <template v-slot:icon-right>
+              <GitHub class="fill-white w-6 h-6"/>
+            </template>
+            GitHub
+          </Button>
+        </a>
 
-        <Button bg-color="bg-blue-600" text-color="text-white">
-          <template v-slot:icon-right>
-            <VkIcon class="fill-white w-6 h-6"/>
-          </template>
-          VK
-        </Button>
+        <a href="https://vk.com/a_d_elec">
+          <Button bg-color="bg-blue-600" text-color="text-white">
+            <template v-slot:icon-right>
+              <VkIcon class="fill-white w-6 h-6"/>
+            </template>
+            VK
+          </Button>
+        </a>
 
-        <Button bg-color="bg-blue-500" text-color="text-white">
-          <template v-slot:icon-right>
-            <TelegramIcon class="fill-white w-6 h-6"/>
-          </template>
-          Telegram
-        </Button>
+        <a href="https://t.me/gg_ad">
+          <Button bg-color="bg-blue-500" text-color="text-white">
+            <template v-slot:icon-right>
+              <TelegramIcon class="fill-white w-6 h-6"/>
+            </template>
+            Telegram
+          </Button>
+        </a>
       </div>
 
       <hr class="mb-4"/>
 
       <div class="flex items-center justify-evenly gap-3 flex-wrap mb-4">
-        <Button bg-color="bg-indigo-600" text-color="text-white" class="flex-1">
+        <Button bg-color="bg-indigo-600" text-color="text-white" class="flex-1" @click="push(RoutesPath.settings)">
           <template v-slot:icon-left>
             <BackIcon class="fill-white w-4 h-4"/>
           </template>

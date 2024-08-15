@@ -5,8 +5,10 @@ const isOpen = defineModel({required: true, type: Boolean})
 const drawerElement = ref<HTMLDivElement | undefined>(undefined)
 const isSwipe = ref(false)
 const animatedBackgroundElement = ref<HTMLDivElement | null>(null)
+const themeColorMeta = ref<HTMLMetaElement | null>(null)
 onMounted(() => {
   animatedBackgroundElement.value = document.querySelector("[data-animated-background]")
+  themeColorMeta.value = document.querySelector('meta[name="theme-color"]')
 })
 let start = 0
 
@@ -37,10 +39,15 @@ const endSwipe = (event: TouchEvent) => {
 
 }
 
-watch(isOpen, () => {
+const smooth = (x: number) => {
+  return x < 0.5 ? 2 * x ** 2 : 1 - 2 * (1 - x) ** 2;
+}
+
+watch(isOpen, (newValue) => {
   if (animatedBackgroundElement.value) {
     document.body.classList.toggle('small-body')
   }
+  themeColorMeta.value.content = newValue ? "rgba(0,0,0)" : "rgb(255,255,255)"
 })
 
 </script>

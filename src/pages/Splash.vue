@@ -8,7 +8,7 @@ const {push} = useRouter()
 const initApp = () => {
   setTimeout(() => {
     push(RoutesPath.main)
-  }, 500)
+  }, 700)
 }
 initApp()
 </script>

@@ -126,7 +126,7 @@ const createHandler = async () => {
 
 
       <div class="flex items-center justify-evenly gap-6 mb-4">
-        <Button class="flex-2">
+        <Button class="flex-2" @click="() => {push(RoutesPath.select)}">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>
           </template>

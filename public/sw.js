@@ -7,7 +7,7 @@ const MESSAGES = {
 const CACHE_KEY = "pwa-cache"
 const CHANEL_KEY = "sw-chanel"
 
-const CACHE_MAP = ["/src/assets/Barcode.png"]
+const CACHE_MAP = ["/Barcode.png", "/index.html", "/sw.js", "/vite.svg", "/zxing_reader.wasm", "/logo/absolute.png", "/logo/chitaj-gorod.png", "/logo/detskij-mir.png", "/logo/eldorado.png", "/logo/evropa.png", "/logo/funday.png", "/logo/imperiya-sumok.png", "/logo/kari.png", "/logo/lenta.png", "/logo/linia.png", "/logo/magnit.png", "/logo/not-found.png", "/logo/ostin.png", "/logo/planeta-zdorovya.png", "/logo/poryadok.png", "/logo/pyatyorochka.png", "/logo/sportmaster.png", "/logo/stalos.png", "/logo/vite.png", "/assets/index-DkHXRrSn.js", "/assets/index-FaYkmPtl.css"]
 const chanel = new BroadcastChannel(CHANEL_KEY)
 
 self.addEventListener('install', async (event) => {

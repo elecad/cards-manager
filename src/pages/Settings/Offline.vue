@@ -9,8 +9,11 @@ import BackIcon from "../../assets/icons/back.svg";
 import FileIcon from "../../assets/icons/file.svg"
 
 import {useOfflineMode} from "../../hooks/useOfflineMode.ts";
+import {useRouter} from "vue-router";
+import {RoutesPath} from "../../router/router.ts";
 
 const {disable, isOffline, enable, cacheList, checkCache} = useOfflineMode()
+const {push} = useRouter()
 
 
 const changeHandler = async () => {
@@ -48,9 +51,9 @@ const getPathName = (fullUrl: string) => {
       </div>
 
 
-      <div class="h-96 bg-gray-200 rounded-md mb-4 p-3">
+      <div class="h-96 bg-gray-200 rounded-md mb-4 p-3 overflow-y-auto">
         <div v-for="cache in cacheList"
-             class="w-full bg-gray-50 px-1 py-2 flex items-center justify-between rounded-md">
+             class="w-full bg-gray-50 px-1 py-2 flex items-center justify-between rounded-md mb-3">
           <div class="flex items-center gap-3 text-sm">
             <FileIcon class="fill-slate-400"/>
             <div class="text-slate-600">{{ getPathName(cache.url) }}</div>
@@ -68,7 +71,7 @@ const getPathName = (fullUrl: string) => {
       </div>
 
       <div class="flex items-center justify-evenly gap-6">
-        <Button class="flex-2">
+        <Button class="flex-2" @click="() => {push(RoutesPath.settings)}">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>
           </template>
