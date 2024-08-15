@@ -39,6 +39,7 @@ const endSwipe = (event: TouchEvent) => {
 
 }
 
+
 watch(isOpen, (newValue) => {
   if (animatedBackgroundElement.value) {
     document.body.classList.toggle('small-body')
