@@ -10,7 +10,7 @@ const emit = defineEmits<{
 
 
 <template>
-  <div class="empty-card-list flex items-center justify-center flex-col text-gray-500 gap-9 h-[50dvh]">
+  <div class="empty-card-list flex items-center justify-center flex-col text-gray-500 gap-9 h-[40dvh]">
     <div class="flex gap-3 flex-col justify-center items-center">
 
       <CardOffIcon class="fill-gray-300 w-20 h-20"/>

@@ -18,7 +18,7 @@ const activeDevices = ref('')
 const isZoom = ref(false)
 const supportedZoom = ref(false)
 const {push} = useRouter()
-const {detect, generate} = useBarcode()
+const {generate, detectFromVideoElement} = useBarcode()
 const isRecognition = ref(false)
 const isCameraReady = ref(false)
 
@@ -86,22 +86,21 @@ const recognitionHandler = async () => {
   if (!videoElement.value)
     return
 
-
-  const videoTracks = stream.value.getVideoTracks()
-  videoElement.value.pause()
-
-  const imageCapture = new ImageCapture(videoTracks[0])
-  const blob = await imageCapture.takePhoto()
-
-
   try {
-    const codes = await detect(blob)
+    const videoTracks = stream.value.getVideoTracks()
+    videoElement.value.pause()
+    // const imageCapture = new ImageCapture(videoTracks[0])
+    // const blob = await imageCapture.takePhoto()
+
+    const codes = await detectFromVideoElement(videoElement.value)
+
     if (!codes.length) {
       await videoElement.value?.play()
       return
     }
     const code = codes[0]
     const base64 = await generate(code.rawValue, code.format)
+
     push({
       path: RoutesPath.create, state: {
         prevData: {
@@ -111,14 +110,13 @@ const recognitionHandler = async () => {
         }
       }
     })
-  } catch (e) {
-    console.error(e)
-
-  } finally {
-    isRecognition.value = false
     videoTracks.forEach((track) => {
       track.stop();
     });
+  } catch (e) {
+    console.error(e)
+  } finally {
+    isRecognition.value = false
   }
 }
 </script>

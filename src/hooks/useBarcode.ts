@@ -1,7 +1,7 @@
 import {BarcodeDetector as BarcodeDetectorPolyfill, setZXingModuleOverrides} from "barcode-detector";
 import QRCode from "qrcode";
 import JsBarcode from "jsbarcode";
-
+//@ts-ignore
 import PDF417 from "pdf417-generator"
 
 export const BARCODES: { [key: string]: string } = {
@@ -30,6 +30,10 @@ export const useBarcode = () => {
         return await barcodeDetector.detect(blob)
     }
 
+    const detectFromVideoElement = async (el: HTMLVideoElement) => {
+        return await barcodeDetector.detect(el)
+    }
+
     const generate = async (data: string, type: string) => {
         const generatedType = BARCODES[type]
         if (!generatedType) throw new Error("This Barcode is not supported");
@@ -56,5 +60,5 @@ export const useBarcode = () => {
         return src
     }
 
-    return {detect, generate}
+    return {detect, generate, detectFromVideoElement}
 }

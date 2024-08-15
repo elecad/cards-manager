@@ -100,7 +100,7 @@ const {push} = useRouter()
       <hr class="mb-6"/>
 
 
-      <div class="flex items-center justify-center flex-col">
+      <div class="flex items-center justify-center flex-col mb-4">
         <div class="text-sm font-medium text-slate-400 mb-4">Закончили настройку?</div>
         <Button bg-color="bg-slate-500" text-color="text-white" @click="() => push(RoutesPath.main)">
           <template v-slot:icon-right>

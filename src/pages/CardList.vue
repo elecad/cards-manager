@@ -99,7 +99,7 @@ const touchSort = async (event: SortableEvent) => {
                     :iconPath="getIconPath(card.icon)"
                     @click="clickHandler($event, card)"/>
               </div>
-              <div class="flex items-center justify-center mt-16">
+              <div class="flex items-center justify-center mt-10">
                 <Button bg-color="bg-slate-500" text-color="text-gray-100" @click="() => {$emit('endSearch')}">
                   <template v-slot:icon-left>
                     <SearchOffIcon class="fill-gray-100 w-6 h-6"/>
