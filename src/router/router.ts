@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 import CardList from "../pages/CardList.vue";
 import EditCard from "../pages/EditCard.vue";
 import Camera from "../pages/Camera.vue";
@@ -47,6 +47,6 @@ export const routes: RouteRecordRaw[] = [
 ]
 
 export const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes,
 })

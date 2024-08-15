@@ -3,7 +3,6 @@ import {ref} from "vue";
 
 const LS_KEY = "offline-mode"
 const CHANEL_KEY = "sw-chanel"
-const CACHE_KEY = "pwa-cache-2"
 
 const MESSAGES = {
     done: "cache-done",
