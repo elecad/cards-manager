@@ -39,15 +39,13 @@ const endSwipe = (event: TouchEvent) => {
 
 }
 
-const smooth = (x: number) => {
-  return x < 0.5 ? 2 * x ** 2 : 1 - 2 * (1 - x) ** 2;
-}
-
 watch(isOpen, (newValue) => {
   if (animatedBackgroundElement.value) {
     document.body.classList.toggle('small-body')
   }
-  themeColorMeta.value.content = newValue ? "rgba(0,0,0)" : "rgb(255,255,255)"
+  if (themeColorMeta.value) {
+    themeColorMeta.value.content = newValue ? "rgba(0,0,0)" : "rgb(255,255,255)"
+  }
 })
 
 </script>
