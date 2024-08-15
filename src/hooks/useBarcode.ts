@@ -2,6 +2,8 @@ import {BarcodeDetector as BarcodeDetectorPolyfill, setZXingModuleOverrides} fro
 import QRCode from "qrcode";
 import JsBarcode from "jsbarcode";
 
+import PDF417 from "pdf417-generator"
+
 export const BARCODES: { [key: string]: string } = {
     // detected: generated
     code_128: "CODE128",
@@ -13,6 +15,7 @@ export const BARCODES: { [key: string]: string } = {
     qr_code: "qr_code",
     upc_a: "UPC", //???
     upc_e: "UPC", // ???
+    pdf417: "pdf417"
 };
 
 export const useBarcode = () => {
@@ -35,13 +38,17 @@ export const useBarcode = () => {
 
         if (generatedType === BARCODES.qr_code) {
             src = await QRCode.toDataURL(data);
+        } else if (generatedType === BARCODES.pdf417) {
+            const placeholderElement = document.createElement("canvas")
+            PDF417.draw(data, placeholderElement)
+            src = placeholderElement.toDataURL()
         } else {
             const placeholderElement = document.createElement("img")
             JsBarcode(placeholderElement, data, {
                 format: generatedType,
                 flat: true,
                 displayValue: false,
-                margin: 20,
+                margin: 10,
             });
             src = placeholderElement.src;
         }

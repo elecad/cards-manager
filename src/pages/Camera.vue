@@ -97,13 +97,9 @@ const recognitionHandler = async () => {
   try {
     const codes = await detect(blob)
     if (!codes.length) {
-      // openAlert("Штрих-код не найден")
       await videoElement.value?.play()
       return
     }
-    videoTracks.forEach((track) => {
-      track.stop();
-    });
     const code = codes[0]
     const base64 = await generate(code.rawValue, code.format)
     push({
@@ -117,9 +113,12 @@ const recognitionHandler = async () => {
     })
   } catch (e) {
     console.error(e)
-    // openAlert("Данный формат файлов не поддерживается")
+
   } finally {
     isRecognition.value = false
+    videoTracks.forEach((track) => {
+      track.stop();
+    });
   }
 }
 </script>
@@ -162,7 +161,7 @@ const recognitionHandler = async () => {
         <div class="flex items-center justify-center gap-5 overflow-y-auto w-full min-h-[40px]">
           <Button v-for="(device, i) in devices"
                   @click="setDevice($event, device)"
-                  class="text-md px-3 py-2 !rounded-full border-2 border-slate-600"
+                  class="text-xs px-3 py-2 !rounded-full border-2 border-slate-600"
                   :class="{'!border-slate-300': device.deviceId === activeDevices}"
                   bg-color="bg-slate-600"
                   text-color="text-slate-200">

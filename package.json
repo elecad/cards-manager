@@ -12,6 +12,7 @@
     "barcode-detector": "^2.2.7",
     "dexie": "^4.0.8",
     "jsbarcode": "^3.11.6",
+    "pdf417-generator": "^1.0.5",
     "pinia": "^2.2.0",
     "qrcode": "^1.5.3",
     "sortablejs": "^1.15.2",

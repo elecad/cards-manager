@@ -10,6 +10,7 @@ export const useAlert = defineStore('drawer', () => {
         console.log("Open")
         message.value = text
         isOpen.value = true
+        console.log(time)
         if (time)
             setTimeout(() => {
                 isOpen.value = false

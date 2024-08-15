@@ -106,7 +106,7 @@ const deleteHandler = async () => {
       </div>
 
       <div class="mb-5 flex items-center justify-center gap-3">
-        <div class="rounded-2xl shadow-sm p-1 border-2">
+        <div class="rounded-2xl shadow-sm p-2 border-2">
           <img :src="editedCard.barcode" alt="Штрих-код"/>
         </div>
         <div class="rounded-2xl shadow-sm p-3 border-2">
