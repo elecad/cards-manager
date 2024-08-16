@@ -49,9 +49,7 @@ const endSwipe = (event: TouchEvent) => {
 }
 
 beforeResolve((_, __, failure) => {
-  if (isOpen.value) {
-    isOpen.value = false
-  } else {
+  if (!isOpen.value) {
     failure()
   }
 
@@ -62,7 +60,6 @@ watch(isOpen, (newValue) => {
     backgroundElement.value.classList.toggle('small-body')
   }
   if (themeColorMeta.value) {
-
     const colors = newValue ? ["#000000", "#FFFFFF"].reverse() : ["#000000", "#FFFFFF"]
     fadeColor(themeColorMeta.value, colors[0], colors[1])
   }
