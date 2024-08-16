@@ -10,7 +10,6 @@
 
 body {
     overscroll-behavior-y: none; /* После этого свайп вниз не будет вызывать обновление страницы */
-    /*transition: 0.1s background-color ease-out;*/
 
 }
 
@@ -33,7 +32,11 @@ body {
     background-color: white;
 }
 
-#app {
+.animation-wrapper {
+    transition: transform .3s cubic-bezier(.32, .72, 0, 1), border-radius .3s cubic-bezier(.32, .72, 0, 1);
+}
+
+.drawer-layout {
     transition: transform .3s cubic-bezier(.32, .72, 0, 1), border-radius .3s cubic-bezier(.32, .72, 0, 1);
 }
 
@@ -42,10 +45,15 @@ body {
     overflow: hidden;
 }
 
-.small-body > .drawer-layout {
+.small-body > .animation-wrapper {
     transform: scale(0.95) translateY(-3px);
-    border-radius: 10px;
+    border-radius: 12px;
 }
+
+.small-body > .animation-wrapper > .drawer-layout {
+    border-radius: 12px;
+}
+
 
 #app {
     min-height: 100dvh;
