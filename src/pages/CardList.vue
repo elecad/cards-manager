@@ -100,7 +100,7 @@ const touchSort = async (event: SortableEvent) => {
                     @click="clickHandler($event, card)"/>
               </div>
               <div class="flex items-center justify-center mt-10">
-                <Button bg-color="bg-slate-500" text-color="text-gray-100" @click="() => {$emit('endSearch')}">
+                <Button bg-color="bg-slate-500" text-color="text-gray-100" @click="endSearch">
                   <template v-slot:icon-left>
                     <SearchOffIcon class="fill-gray-100 w-6 h-6"/>
                   </template>
