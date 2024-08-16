@@ -30,7 +30,7 @@ const {push} = useRouter()
           </div>
         </ScaleTransition>
 
-        <div class="font-bold text-gray-700">Картница v0.5 <sup>βeta</sup></div>
+        <div class="font-bold text-gray-700">Картница v0.6 <sup>βeta</sup></div>
         <div class="text-gray-500">Просто, быстро, без интернета</div>
         <div class="text-gray-500 text-sm">by Anton Dakhin 2024</div>
 
