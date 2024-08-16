@@ -12,7 +12,7 @@ import BigButton from "../components/SelectItem.vue";
 import AddCameraIcon from "../assets/icons/add_camera.svg";
 import AddImageIcon from "../assets/icons/add_image.svg";
 
-const {push} = useRouter()
+const {replace} = useRouter()
 
 
 interface Modes {
@@ -46,7 +46,7 @@ const nextStage = () => {
   const current = modes[selectedMode.value]
   if (!current)
     return
-  push(current.path)
+  replace(current.path)
 }
 </script>
 
@@ -64,7 +64,7 @@ const nextStage = () => {
 
 
       <div class="flex items-center justify-evenly gap-6 mt-5">
-        <Button class="flex-1" @click="() => {push(RoutesPath.main)}">
+        <Button class="flex-1" @click="() => {replace(RoutesPath.main)}">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>
           </template>

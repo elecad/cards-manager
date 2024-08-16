@@ -17,7 +17,7 @@ const {back} = useRouter()
 const {fileToBlob} = useFile()
 const {detect, generate} = useBarcode()
 const fileElement = ref<HTMLInputElement | null>(null)
-const {push} = useRouter()
+const {replace} = useRouter()
 const isOpenAlert = ref(false)
 const alertMessage = ref("")
 
@@ -59,7 +59,7 @@ const loadHandler = async (event: Event) => {
       }
       const code = codes[0]
       const base64 = await generate(code.rawValue, code.format)
-      push({
+      replace({
         path: RoutesPath.create, state: {
           prevData: {
             barcode: base64,

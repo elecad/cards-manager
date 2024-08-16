@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
+import {useRouter} from "vue-router";
+import {router} from "../../router/router.ts";
 
 const isOpen = defineModel({required: true, type: Boolean})
 const drawerElement = ref<HTMLDivElement | undefined>(undefined)
 const isSwipe = ref(false)
 const animatedBackgroundElement = ref<HTMLDivElement | null>(null)
 const themeColorMeta = ref<HTMLMetaElement | null>(null)
+
+const {beforeResolve} = useRouter()
+
 onMounted(() => {
   animatedBackgroundElement.value = document.querySelector("[data-animated-background]")
   themeColorMeta.value = document.querySelector('meta[name="theme-color"]')
+
 })
 let start = 0
 
@@ -39,6 +45,14 @@ const endSwipe = (event: TouchEvent) => {
 
 }
 
+beforeResolve((_, __, failure) => {
+  if (isOpen.value) {
+    isOpen.value = false
+  } else {
+    failure()
+  }
+
+})
 
 watch(isOpen, (newValue) => {
   if (animatedBackgroundElement.value) {

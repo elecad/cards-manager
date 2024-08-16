@@ -17,7 +17,7 @@ const devices = ref<MediaDeviceInfo[]>([])
 const activeDevices = ref('')
 const isZoom = ref(false)
 const supportedZoom = ref(false)
-const {push} = useRouter()
+const {replace} = useRouter()
 const {generate, detectFromVideoElement} = useBarcode()
 const isRecognition = ref(false)
 const isCameraReady = ref(false)
@@ -101,7 +101,7 @@ const recognitionHandler = async () => {
     const code = codes[0]
     const base64 = await generate(code.rawValue, code.format)
 
-    push({
+    replace({
       path: RoutesPath.create, state: {
         prevData: {
           barcode: base64,
@@ -135,7 +135,7 @@ const recognitionHandler = async () => {
 
       <div class="control-panel flex-1 bg-black w-full text-white flex items-center justify-center flex-col gap-5 py-5">
         <div class="flex items-center justify-evenly w-full">
-          <Button only-icon bg-color="bg-slate-600" @click="() => push(RoutesPath.select)">
+          <Button only-icon bg-color="bg-slate-600" @click="() => replace(RoutesPath.select)">
             <template v-slot:icon-left>
               <BackIcon class="fill-slate-300 w-4 h-4"/>
             </template>

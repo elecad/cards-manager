@@ -18,7 +18,7 @@ import {useAlert} from "../store/useAlert.ts";
 import {ICreateCard, PlaceholderCreatedData, useCardStore} from "../store/useCardStore.ts";
 
 
-const {push} = useRouter()
+const {replace} = useRouter()
 const cardState = useCardStore()
 const cardData = ref<ISaleCardTransport>(PlaceholderCreatedData)
 
@@ -26,7 +26,7 @@ const routerState = history.state.prevData as ISaleCardTransport
 
 console.log(history.state)
 if (!routerState) {
-  push(RoutesPath.error)
+  replace(RoutesPath.error)
 } else {
   cardData.value = routerState
 }
@@ -79,7 +79,7 @@ const createHandler = async () => {
       }
   await cardState.add(newCard)
 
-  await push({path: RoutesPath.complete, state: {prevDate: newCard}})
+  await replace({path: RoutesPath.complete, state: {prevDate: newCard}})
 }
 
 </script>
@@ -126,7 +126,7 @@ const createHandler = async () => {
 
 
       <div class="flex items-center justify-evenly gap-6 mb-4">
-        <Button class="flex-2" @click="() => {push(RoutesPath.select)}">
+        <Button class="flex-2" @click="() => {replace(RoutesPath.select)}">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>
           </template>

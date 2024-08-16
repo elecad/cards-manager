@@ -18,7 +18,7 @@ import {notFoundIcon, saleCardIconList} from "../config/cardPatterns.ts";
 import {useAlert} from "../store/useAlert.ts";
 import Alert from "../components/UI/Alert.vue";
 
-const {push} = useRouter()
+const {replace} = useRouter()
 const {openAlert, closeAlert} = useAlert()
 const cardState = useCardStore()
 
@@ -26,7 +26,7 @@ const editedCard = ref<ISaleCard>(PlaceholderCard)
 
 const routerState = history.state.prevDate as ISaleCard
 if (!routerState) {
-  push(RoutesPath.error)
+  replace(RoutesPath.error)
 } else {
   editedCard.value = routerState
 }
@@ -64,12 +64,12 @@ const editHandler = async () => {
   }
 
   await cardState.update(editedCard.value)
-  await push(RoutesPath.main)
+  await replace(RoutesPath.main)
 }
 
 const deleteHandler = async () => {
   await cardState.remove(editedCard.value.id)
-  await push(RoutesPath.main)
+  await replace(RoutesPath.main)
 }
 </script>
 
@@ -124,7 +124,7 @@ const deleteHandler = async () => {
       </div>
 
       <div class="flex items-center justify-evenly gap-6 mb-4">
-        <Button class="flex-2" @click="() => {push(RoutesPath.main)}">
+        <Button class="flex-2" @click="() => {replace(RoutesPath.main)}">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>
           </template>

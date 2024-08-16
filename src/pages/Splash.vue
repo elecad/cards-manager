@@ -4,10 +4,10 @@ import WalletIcon from "../assets/icons/wallet.svg";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 
-const {push} = useRouter()
+const {replace} = useRouter()
 const initApp = () => {
   setTimeout(() => {
-    push(RoutesPath.main)
+    replace(RoutesPath.main)
   }, 700)
 }
 initApp()

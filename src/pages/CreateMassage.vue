@@ -11,7 +11,7 @@ import {RoutesPath} from "../router/router.ts";
 import {ISaleCard} from "../service/card.service.ts";
 import {computed, ref} from "vue";
 
-const {push} = useRouter()
+const {replace} = useRouter()
 
 const name = ref("")
 const iconName = ref("")
@@ -23,7 +23,7 @@ console.log(routerState)
 
 if (!routerState) {
   console.log("Ошибка!!")
-  push(RoutesPath.error)
+  replace(RoutesPath.error)
 
 } else {
   name.value = routerState.name
@@ -53,7 +53,7 @@ const iconPath = computed(() => `/public/logo/${iconName.value}`
 
       <div class="flex items-center justify-evenly gap-6">
 
-        <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="() => {push(RoutesPath.main)}">
+        <Button bg-color="bg-blue-600" text-color="text-white" class="flex-1" @click="() => {replace(RoutesPath.main)}">
           <template v-slot:icon-right>
             <HomeIcon class="fill-white w-5 h-5"/>
           </template>

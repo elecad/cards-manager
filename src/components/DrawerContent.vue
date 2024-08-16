@@ -54,7 +54,7 @@ const goEditPage = () => {
     </div>
 
     <div class="mb-2 flex items-center justify-center gap-3">
-      <div class="rounded-2xl shadow p-1 border-2 shadow-black/5">
+      <div class="rounded-2xl shadow p-2 border-2 shadow-black/5">
         <img :src="cardStore.selectedCard.barcode" alt="Штрих-код"/>
       </div>
     </div>
