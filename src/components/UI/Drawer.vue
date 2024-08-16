@@ -6,12 +6,14 @@ const isOpen = defineModel({required: true, type: Boolean})
 const drawerElement = ref<HTMLDivElement | undefined>(undefined)
 const isSwipe = ref(false)
 const animatedBackgroundElement = ref<HTMLDivElement | null>(null)
+const backgroundElement = ref<HTMLDivElement | null>(null)
 const themeColorMeta = ref<HTMLMetaElement | null>(null)
 
 const {beforeResolve} = useRouter()
 
 onMounted(() => {
   animatedBackgroundElement.value = document.querySelector("[data-animated-background]")
+  backgroundElement.value = document.querySelector("#app")
   themeColorMeta.value = document.querySelector('meta[name="theme-color"]')
 
 })
@@ -54,8 +56,8 @@ beforeResolve((_, __, failure) => {
 })
 
 watch(isOpen, (newValue) => {
-  if (animatedBackgroundElement.value) {
-    document.body.classList.toggle('small-body')
+  if (animatedBackgroundElement.value && backgroundElement.value) {
+    backgroundElement.value.classList.toggle('small-body')
   }
   if (themeColorMeta.value) {
     themeColorMeta.value.content = newValue ? "rgba(0,0,0)" : "rgb(255,255,255)"

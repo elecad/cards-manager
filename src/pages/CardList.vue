@@ -81,7 +81,7 @@ const touchSort = async (event: SortableEvent) => {
 
 <template>
   <DrawerLayout>
-    <div data-animated-background>
+    <div>
       <Navigation/>
       <div class="content px-5 pt-4">
         <Search v-model="query" @change="searchHandler" @focus="focusHandler" @blur="blurHandler"/>

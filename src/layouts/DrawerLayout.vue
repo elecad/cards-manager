@@ -11,8 +11,7 @@ const uiStore = useDrawer()
 </script>
 
 <template>
-  <div class="drawer-layout w-full h-full inline-block">
-
+  <div class="drawer-layout w-full h-full inline-block" data-animated-background>
     <slot/>
 
     <FloatingButton :closed="uiStore.isOpen"/>
