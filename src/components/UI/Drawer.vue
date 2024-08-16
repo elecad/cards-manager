@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 import {useRouter} from "vue-router";
-import {router} from "../../router/router.ts";
 
 const isOpen = defineModel({required: true, type: Boolean})
 const drawerElement = ref<HTMLDivElement | undefined>(undefined)
