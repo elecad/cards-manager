@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 import {useRouter} from "vue-router";
+import {useAndroidPanel} from "../../hooks/useAndroidPanel.ts";
 
 const isOpen = defineModel({required: true, type: Boolean})
 const drawerElement = ref<HTMLDivElement | undefined>(undefined)
@@ -10,6 +11,7 @@ const backgroundElement = ref<HTMLDivElement | null>(null)
 const themeColorMeta = ref<HTMLMetaElement | null>(null)
 
 const {beforeResolve} = useRouter()
+const {fadeColor} = useAndroidPanel()
 
 onMounted(() => {
   animatedBackgroundElement.value = document.querySelector("[data-animated-background]")
@@ -60,7 +62,9 @@ watch(isOpen, (newValue) => {
     backgroundElement.value.classList.toggle('small-body')
   }
   if (themeColorMeta.value) {
-    themeColorMeta.value.content = newValue ? "rgba(0,0,0)" : "rgb(255,255,255)"
+
+    const colors = newValue ? ["#000000", "#FFFFFF"].reverse() : ["#000000", "#FFFFFF"]
+    fadeColor(themeColorMeta.value, colors[0], colors[1])
   }
 })
 
