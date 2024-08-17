@@ -10,7 +10,6 @@ import Button from "../components/UI/Button.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {useBarcode} from "../hooks/useBarcode.ts";
-import Alert from "../components/UI/Alert.vue";
 import {useAlert} from "../store/useAlert.ts";
 import AlertUp from "../components/UI/AlertUp.vue";
 
