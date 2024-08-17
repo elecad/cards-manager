@@ -60,14 +60,21 @@ beforeResolve((_, __, failure) => {
 watch(isOpen, (newValue) => {
   if (animatedBackgroundElement.value && backgroundElement.value && htmlElement.value) {
     backgroundElement.value.classList.toggle('small-body')
-    htmlElement.value.classList.toggle("off-scroll")
+    if (newValue) {
+      htmlElement.value.classList.toggle("off-scroll")
+    } else {
+      setTimeout(() => {
+        if (htmlElement.value)
+          htmlElement.value.classList.toggle("off-scroll")
+      }, 100)
+    }
 
   }
   if (themeColorMeta.value) {
     const colors = newValue ? ["#000000", "#FFFFFF"].reverse() : ["#000000", "#FFFFFF"]
     fadeColor(themeColorMeta.value, colors[0], colors[1])
   }
-  
+
 })
 
 </script>
