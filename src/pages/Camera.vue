@@ -10,6 +10,9 @@ import Button from "../components/UI/Button.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {useBarcode} from "../hooks/useBarcode.ts";
+import Alert from "../components/UI/Alert.vue";
+import {useAlert} from "../store/useAlert.ts";
+import AlertUp from "../components/UI/AlertUp.vue";
 
 const videoElement = ref<HTMLVideoElement | null>()
 const stream = ref<MediaStream | null>()
@@ -21,6 +24,7 @@ const {replace} = useRouter()
 const {generate, detectFromVideoElement} = useBarcode()
 const isRecognition = ref(false)
 const isCameraReady = ref(false)
+const {openAlert} = useAlert()
 
 onMounted(async () => {
 
@@ -96,6 +100,7 @@ const recognitionHandler = async () => {
 
     if (!codes.length) {
       await videoElement.value?.play()
+      openAlert("Штрих-код не найден", 1000)
       return
     }
     const code = codes[0]
@@ -115,9 +120,21 @@ const recognitionHandler = async () => {
     });
   } catch (e) {
     console.error(e)
+    openAlert("Данный формат не поддерживатеся", 1500)
+    videoElement.value?.play()
   } finally {
     isRecognition.value = false
   }
+}
+
+const exit = () => {
+  if (stream.value) {
+    const videoTracks = stream.value.getVideoTracks()
+    videoTracks.forEach((track) => {
+      track.stop();
+    });
+  }
+  replace(RoutesPath.select)
 }
 </script>
 
@@ -135,7 +152,7 @@ const recognitionHandler = async () => {
 
       <div class="control-panel flex-1 bg-black w-full text-white flex items-center justify-center flex-col gap-5 py-5">
         <div class="flex items-center justify-evenly w-full">
-          <Button only-icon bg-color="bg-slate-600" @click="() => replace(RoutesPath.select)">
+          <Button only-icon bg-color="bg-slate-600" @click="exit">
             <template v-slot:icon-left>
               <BackIcon class="fill-slate-300 w-4 h-4"/>
             </template>
@@ -168,6 +185,7 @@ const recognitionHandler = async () => {
         </div>
       </div>
     </div>
+    <AlertUp/>
   </DefaultLayout>
 </template>
 

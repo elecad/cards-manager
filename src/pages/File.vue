@@ -69,7 +69,7 @@ const loadHandler = async (event: Event) => {
       })
     } catch (e) {
       console.error(e)
-      openAlert("Данный формат файлов не поддерживается", 1500)
+      openAlert("Данный формат не поддерживается", 1500)
     }
 
 
