@@ -20,7 +20,7 @@ const alertState = useAlert()
 .alert-wrapper {
   position: fixed;
   bottom: 0;
-  transform: translateY(200%);
+  transform: translateY(250%);
 }
 
 .alert-wrapper.open {

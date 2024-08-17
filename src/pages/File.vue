@@ -13,11 +13,10 @@ import {useBarcode} from "../hooks/useBarcode.ts";
 import {RoutesPath} from "../router/router.ts";
 import CancelIcon from "../assets/icons/cancel.svg";
 
-const {back} = useRouter()
+const {replace} = useRouter()
 const {fileToBlob} = useFile()
 const {detect, generate} = useBarcode()
 const fileElement = ref<HTMLInputElement | null>(null)
-const {replace} = useRouter()
 const isOpenAlert = ref(false)
 const alertMessage = ref("")
 
@@ -96,7 +95,7 @@ const loadHandler = async (event: Event) => {
       </BigButton>
 
       <div class="flex items-center justify-evenly gap-6 mt-5">
-        <Button class="flex-1" @click="back">
+        <Button class="flex-1" @click="() => replace(RoutesPath.select)">
           <template v-slot:icon-left>
             <BackIcon class="fill-gray-500 w-4 h-4"/>
           </template>
@@ -119,7 +118,7 @@ const loadHandler = async (event: Event) => {
 .alert-wrapper {
   position: fixed;
   bottom: 0;
-  transform: translateY(200%);
+  transform: translateY(250%);
 }
 
 .alert-wrapper.open {

@@ -3,14 +3,18 @@
 @tailwind utilities;
 
 html {
-    overflow-scrolling: touch;
-    overflow: hidden;
+
 }
 
 
 * {
     box-sizing: border-box;
     user-select: none;
+}
+
+.off-scroll {
+    overflow-scrolling: touch;
+    overflow: hidden;
 }
 
 body {
