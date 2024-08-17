@@ -24,6 +24,8 @@ const query = ref("")
 
 cardStore.getAll()
 
+cardStore.add({data: '123', name: "123", icon: "123", barcode: "123", type: "123", description: "123"})
+
 const getIconPath = (icon: string) => `/public/logo/${icon}`
 
 const clickHandler = (_: MouseEvent, selectedCard: ISaleCard) => {
