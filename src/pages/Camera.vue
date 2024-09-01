@@ -145,7 +145,7 @@ const recognitionHandler = async () => {
     });
   } catch (e) {
     console.error(e)
-    openAlert("Данный формат не поддерживатеся", 1500)
+    openAlert("данный формат не поддерживается", 1500)
     videoElement.value?.play()
   } finally {
     isRecognition.value = false
