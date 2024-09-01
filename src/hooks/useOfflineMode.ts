@@ -46,12 +46,18 @@ export const useOfflineMode = () => {
     }
 
     const disable = async () => {
+
         console.log("[С] Удаление воркера")
         const services = await navigator.serviceWorker.getRegistrations()
         for (const worker of services) {
             await worker.unregister()
         }
         localStorage.setItem(LS_KEY, JSON.stringify(false))
+        const cacheKeys = await caches.keys()
+        for (const key of cacheKeys) {
+            await caches.delete(key)
+        }
+
         location.reload()
 
 
