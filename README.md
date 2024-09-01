@@ -1,3 +1,0 @@
-# Sale Cards App (Vue 3 + TypeScript + Vite)
-
-There will be a detailed description here in the future. Soon...
