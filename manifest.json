@@ -28,9 +28,9 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "/repository/",
+  "start_url": "/cards-manager/",
   "display": "standalone",
   "background_color": "#ffffff",
   "description": "Приложение для хранения своих скидочых карт. Просто, бысто и без Интернета!",
-  "scope": "/repository/"
+  "scope": "/cards-manager/"
 }
