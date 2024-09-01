@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DefaultLayout from "../layouts/DefaultLayout.vue";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import CameraIcon from "../assets/icons/camera.svg"
 import ImageSearchIcon from "../assets/icons/image_search.svg"
 import BackIcon from "../assets/icons/back.svg"
@@ -10,8 +10,7 @@ import Button from "../components/UI/Button.vue";
 import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {useBarcode} from "../hooks/useBarcode.ts";
-import {useAlert} from "../store/useAlert.ts";
-import AlertUp from "../components/UI/AlertUp.vue";
+import CancelIcon from "../assets/icons/cancel.svg";
 
 const videoElement = ref<HTMLVideoElement | null>()
 const stream = ref<MediaStream | null>()
@@ -20,10 +19,31 @@ const activeDevices = ref('')
 const isZoom = ref(false)
 const supportedZoom = ref(false)
 const {replace} = useRouter()
-const {generate, detectFromVideoElement} = useBarcode()
+const {generate, detectFromVideoElement, detect} = useBarcode()
 const isRecognition = ref(false)
 const isCameraReady = ref(false)
-const {openAlert} = useAlert()
+
+const isIOS = computed(() => [
+  'iPad Simulator',
+  'iPhone Simulator',
+  'iPod Simulator',
+  'iPad',
+  'iPhone',
+  'iPod'
+].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document))
+
+const isOpenAlert = ref(false)
+const alertMessage = ref("")
+
+const openAlert = (text: string, time?: number) => {
+  alertMessage.value = text
+  isOpenAlert.value = true
+  if (time)
+    setTimeout(() => {
+      isOpenAlert.value = false
+    }, time)
+}
+
 
 onMounted(async () => {
 
@@ -83,6 +103,7 @@ const zoomChange = async () => {
 
 const recognitionHandler = async () => {
   console.log("Начало")
+
   isRecognition.value = true
   if (!stream.value)
     return
@@ -92,10 +113,15 @@ const recognitionHandler = async () => {
   try {
     const videoTracks = stream.value.getVideoTracks()
     videoElement.value.pause()
-    // const imageCapture = new ImageCapture(videoTracks[0])
-    // const blob = await imageCapture.takePhoto()
+    let codes = []
+    if (isIOS.value) {
+      codes = await detectFromVideoElement(videoElement.value)
+    } else {
+      const imageCapture = new ImageCapture(videoTracks[0])
+      const blob = await imageCapture.takePhoto()
+      codes = await detect(blob)
+    }
 
-    const codes = await detectFromVideoElement(videoElement.value)
 
     if (!codes.length) {
       await videoElement.value?.play()
@@ -184,7 +210,13 @@ const exit = () => {
         </div>
       </div>
     </div>
-    <AlertUp/>
+    <div
+        class="alert-wrapper bg-red-500 rounded-t-md shadow-sm p-2 flex items-center justify-center gap-3 w-full transition-transform duration-500 z-20"
+        :class="{'open': isOpenAlert}"
+    >
+      <CancelIcon class="fill-white w-6 h-6"/>
+      <div class="alert-message text-md text-white text-center">{{ alertMessage }}</div>
+    </div>
   </DefaultLayout>
 </template>
 
@@ -263,5 +295,20 @@ const exit = () => {
   }
 }
 
+.alert-wrapper {
+  position: fixed;
+  top: 0;
+  transform: translateY(-250%);
+}
+
+.alert-wrapper.open {
+  transform: translateY(0);
+}
+
+@media (max-width: 370px) {
+  .alert-message {
+    @apply text-xs
+  }
+}
 
 </style>
