@@ -56,8 +56,9 @@ const nextStage = () => {
       <Logo class="mb-3"/>
       <div class="text-center text-lg text-gray-500">Как добавить карту?</div>
 
-      <BigButton v-for="({header, label, icon}, i) in modes" :header :label @click="changeMode($event, i)"
-                 :selected="selectedMode === i">
+      <BigButton v-for="({header, label, icon}, i) in modes" :header :label
+                 @click="($event) => {changeMode($event, i); nextStage()}"
+      >
         <AddCameraIcon v-if="icon == 'camera'" class="h-8 w-8 fill-gray-400"/>
         <AddImageIcon v-else class="h-8 w-8 fill-gray-400"/>
       </BigButton>
@@ -70,12 +71,12 @@ const nextStage = () => {
           </template>
           Назад
         </Button>
-        <Button bg-color="bg-blue-600" text-color="text-white flex-1" @click="nextStage">
-          <template v-slot:icon-right>
-            <NextIcon class="fill-white w-4 h-4"/>
-          </template>
-          Далее
-        </Button>
+        <!--                <Button bg-color="bg-blue-600" text-color="text-white flex-1" @click="nextStage">-->
+        <!--                  <template v-slot:icon-right>-->
+        <!--                    <NextIcon class="fill-white w-4 h-4"/>-->
+        <!--                  </template>-->
+        <!--                  Далее-->
+        <!--                </Button>-->
       </div>
 
     </div>

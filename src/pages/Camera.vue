@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DefaultLayout from "../layouts/DefaultLayout.vue";
-import {computed, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import CameraIcon from "../assets/icons/camera.svg"
 import ImageSearchIcon from "../assets/icons/image_search.svg"
 import BackIcon from "../assets/icons/back.svg"
