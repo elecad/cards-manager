@@ -16,6 +16,7 @@ import {debounce} from "../helpers/Debounce.ts";
 import Alert from "../components/UI/Alert.vue";
 import {useAlert} from "../store/useAlert.ts";
 import {ICreateCard, PlaceholderCreatedData, useCardStore} from "../store/useCardStore.ts";
+import { RootURL } from "../config/buildConfig.ts";
 
 
 const {replace} = useRouter()
@@ -47,7 +48,7 @@ watch(isValidMaxLenght, (newValue) => {
 
 })
 
-const iconPath = computed(() => `/public/logo/${iconName.value}`)
+const iconPath = computed(() => `${RootURL}/public/logo/${iconName.value}`)
 
 const inputHandler = debounce(() => {
   const findIcon = saleCardIconList.find((el) => {

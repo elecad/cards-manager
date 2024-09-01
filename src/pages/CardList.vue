@@ -16,6 +16,7 @@ import SearchNotFound from "../components/SearchNotFound.vue";
 import SearchOffIcon from "../assets/icons/search_off.svg"
 import Button from "../components/UI/Button.vue";
 import {SortableEvent} from "sortablejs";
+import { RootURL } from "../config/buildConfig.ts";
 
 const drawerStore = useDrawer()
 const cardStore = useCardStore()
@@ -25,7 +26,7 @@ const query = ref("")
 cardStore.getAll()
 
 
-const getIconPath = (icon: string) => `/public/logo/${icon}`
+const getIconPath = (icon: string) => `${RootURL}/public/logo/${icon}`
 
 const clickHandler = (_: MouseEvent, selectedCard: ISaleCard) => {
   cardStore.select(selectedCard)

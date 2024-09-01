@@ -10,6 +10,7 @@ import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {ISaleCard} from "../service/card.service.ts";
 import {computed, ref} from "vue";
+import { RootURL } from "../config/buildConfig.ts";
 
 const {replace} = useRouter()
 
@@ -29,7 +30,7 @@ if (!routerState) {
   name.value = routerState.name
   iconName.value = routerState.icon
 }
-const iconPath = computed(() => `/public/logo/${iconName.value}`
+const iconPath = computed(() => `${RootURL}/public/logo/${iconName.value}`
 )
 
 </script>
