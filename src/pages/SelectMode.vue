@@ -2,7 +2,6 @@
 
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import Button from "../components/UI/Button.vue";
-import NextIcon from "../assets/icons/next.svg";
 import BackIcon from "../assets/icons/back.svg";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
