@@ -1,0 +1,1 @@
+export const RootURL = '/cards-manager'

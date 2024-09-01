@@ -8,6 +8,7 @@ import {useRouter} from "vue-router";
 import {RoutesPath} from "../router/router.ts";
 import {useDrawer} from "../store/useDrawer.ts";
 import {useCardStore} from "../store/useCardStore.ts";
+import { RootURL } from "../config/buildConfig.ts";
 
 
 const {push} = useRouter()
@@ -23,7 +24,7 @@ const message = computed(() =>
         ? cardStore.selectedCard.description.replace(/./g, "*")
         : cardStore.selectedCard.description
 )
-const iconPath = computed(() => `/public/logo/${cardStore.selectedCard.icon}`)
+const iconPath = computed(() => `${RootURL}/public/logo/${cardStore.selectedCard.icon}`)
 
 const goEditPage = () => {
   drawerStore.closeDrawer();

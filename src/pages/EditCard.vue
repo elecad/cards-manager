@@ -17,6 +17,7 @@ import {debounce} from "../helpers/Debounce.ts";
 import {notFoundIcon, saleCardIconList} from "../config/cardPatterns.ts";
 import {useAlert} from "../store/useAlert.ts";
 import Alert from "../components/UI/Alert.vue";
+import { RootURL } from "../config/buildConfig.ts";
 
 const {replace} = useRouter()
 const {openAlert, closeAlert} = useAlert()
@@ -31,7 +32,7 @@ if (!routerState) {
   editedCard.value = routerState
 }
 
-const iconPath = computed(() => `/public/logo/${editedCard.value.icon}`)
+const iconPath = computed(() => `${RootURL}/public/logo/${editedCard.value.icon}`)
 const isValidMinLenght = computed(() => editedCard.value.name.length > 0)
 const isValidMaxLenght = computed(() => editedCard.value.name.length < 21)
 
