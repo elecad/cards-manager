@@ -24,6 +24,7 @@ const query = ref("")
 
 cardStore.getAll()
 
+
 const getIconPath = (icon: string) => `/public/logo/${icon}`
 
 const clickHandler = (_: MouseEvent, selectedCard: ISaleCard) => {
@@ -77,6 +78,7 @@ const touchSort = async (event: SortableEvent) => {
   await cardStore.update({...editCard, position: oldPosition})
   await cardStore.update({...touchCard, position: newPosition})
 }
+
 </script>
 
 <template>

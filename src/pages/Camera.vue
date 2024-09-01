@@ -23,14 +23,6 @@ const {generate, detectFromVideoElement, detect} = useBarcode()
 const isRecognition = ref(false)
 const isCameraReady = ref(false)
 
-const isIOS = computed(() => [
-  'iPad Simulator',
-  'iPhone Simulator',
-  'iPod Simulator',
-  'iPad',
-  'iPhone',
-  'iPod'
-].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document))
 
 const isOpenAlert = ref(false)
 const alertMessage = ref("")
@@ -114,12 +106,14 @@ const recognitionHandler = async () => {
     const videoTracks = stream.value.getVideoTracks()
     videoElement.value.pause()
     let codes = []
-    if (isIOS.value) {
-      codes = await detectFromVideoElement(videoElement.value)
-    } else {
+
+    if ("ImageCapture" in window) {
       const imageCapture = new ImageCapture(videoTracks[0])
       const blob = await imageCapture.takePhoto()
       codes = await detect(blob)
+    } else {
+      console.log("No ImageCapture API")
+      codes = await detectFromVideoElement(videoElement.value)
     }
 
 
