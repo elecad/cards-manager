@@ -2,87 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-
+:root {
+	--background-color: #ffffff;
+	--text-color: #000000;
+	--card-bg: #f3f4f6;
+	--card-border: #d1d5db;
+	--drawer-bg: #ffffff;
 }
 
+.dark {
+	--background-color: #1f2937;
+	--text-color: #f3f4f6;
+	--card-bg: #374151;
+	--card-border: #4b5563;
+	--drawer-bg: #111827;
+}
+
+html {
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
 
 * {
-    box-sizing: border-box;
-    user-select: none;
+	box-sizing: border-box;
+	user-select: none;
 }
 
 .off-scroll {
-    overflow-scrolling: touch;
-    overflow: hidden;
+	overflow-scrolling: touch;
+	overflow: hidden;
 }
 
 body {
-    overscroll-behavior-y: none; /* После этого свайп вниз не будет вызывать обновление страницы */
-
+	overscroll-behavior-y: none; /* После этого свайп вниз не будет вызывать обновление страницы */
+	background-color: var(--background-color);
+	color: var(--text-color);
 }
-
 
 #app {
-    background-color: black;
+	background-color: black;
 }
 
-
 .animated-background {
-    transform: scale(0.96);
+	transform: scale(0.96);
 }
 
 [data-animated-background] {
-    transition: transform .3s cubic-bezier(.32, .72, 0, 1);
+	transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .drawer-layout {
-    min-height: 100dvh;
-    background-color: white;
+	min-height: 100dvh;
+	background-color: var(--background-color);
 }
 
 .animation-wrapper {
-    transition: transform .3s cubic-bezier(.32, .72, 0, 1), border-radius .3s cubic-bezier(.32, .72, 0, 1);
+	transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+		border-radius 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+	background-color: var(--background-color) !important;
 }
 
 .drawer-layout {
-    transition: transform .3s cubic-bezier(.32, .72, 0, 1), border-radius .3s cubic-bezier(.32, .72, 0, 1);
+	transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+		border-radius 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-
 .small-body {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .small-body > .animation-wrapper {
-    transform: scale(0.95) translateY(-3px);
-    border-radius: 12px;
+	transform: scale(0.95) translateY(-3px);
+	border-radius: 12px;
 }
 
 .small-body > .animation-wrapper > .drawer-layout {
-    border-radius: 12px;
+	border-radius: 12px;
 }
 
-
 #app {
-    min-height: 100dvh;
+	min-height: 100dvh;
 }
 
 @media (min-width: 550px) {
-    body {
-        margin-left: calc((100dvw - 550px) / 2);
-        margin-right: calc((100dvw - 550px) / 2);
-        overflow-y: scroll;
-        @apply bg-gray-300;
-    }
+	body {
+		margin-left: calc((100dvw - 550px) / 2);
+		margin-right: calc((100dvw - 550px) / 2);
+		overflow-y: scroll;
+		@apply bg-gray-300 dark:bg-gray-800;
+	}
 
-    .drawer-wrapper {
-        margin-left: calc((100dvw - 550px) / 2);
-        margin-right: calc((100dvw - 550px) / 2);
-    }
+	.drawer-wrapper {
+		margin-left: calc((100dvw - 550px) / 2);
+		margin-right: calc((100dvw - 550px) / 2);
+	}
 
-    .floating-button-drawer {
-        width: calc(550px - 20px);
-    }
+	.floating-button-drawer {
+		width: calc(550px - 20px);
+	}
 }
-
